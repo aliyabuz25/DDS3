@@ -1,0 +1,219 @@
+{
+  "info": {
+    "title": "BibleCMS Authentication API",
+    "description": "User registration and login endpoints with CORS, User-Agent filtering, Bruteforce protection, and XSS sanitization.",
+    "version": "1.0.0"
+  },
+  "security": {
+    "UserAgent": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "User-Agent",
+      "required_value": "bible-appclient"
+    }
+  },
+  "endpoints": {
+    "/api/register": {
+      "post": {
+        "summary": "Register a new user",
+        "description": "Validates, sanitizes input for XSS, hashes password, and saves user credentials.",
+        "headers": {
+          "User-Agent": "bible-appclient",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "firstName": {
+            "type": "string",
+            "required": true,
+            "description": "First name of the user (sanitized against XSS)"
+          },
+          "lastName": {
+            "type": "string",
+            "required": true,
+            "description": "Last name of the user (sanitized against XSS)"
+          },
+          "email": {
+            "type": "string",
+            "required": true,
+            "description": "Valid email address (unique)"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "required": true,
+            "description": "Phone number"
+          },
+          "password": {
+            "type": "string",
+            "required": true,
+            "description": "User password"
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Registration",
+            "body": {
+              "message": "Kayıt başarıyla tamamlandı.",
+              "user": {
+                "id": 1,
+                "firstName": "Ahmet",
+                "lastName": "Yılmaz",
+                "email": "ahmet@example.com",
+                "phoneNumber": "5551234567"
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error / User Already Exists",
+            "body": {
+              "message": "Bu e-posta adresi zaten kullanımda."
+            }
+          },
+          "403": {
+            "description": "Forbidden (Invalid User-Agent)",
+            "body": {
+              "message": "Erişim engellendi: Geçersiz User-Agent."
+            }
+          },
+          "429": {
+            "description": "Too Many Requests (Rate limit exceeded)",
+            "body": {
+              "message": "Çok fazla giriş denemesi yaptınız. Lütfen 15 dakika sonra tekrar deneyin."
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "summary": "Login an existing user",
+        "description": "Authenticates user credentials and returns a JSON Web Token (JWT).",
+        "headers": {
+          "User-Agent": "bible-appclient",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "email": {
+            "type": "string",
+            "required": true,
+            "description": "User email address"
+          },
+          "password": {
+            "type": "string",
+            "required": true,
+            "description": "User password"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Authentication",
+            "body": {
+              "message": "Giriş başarılı.",
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+              "user": {
+                "id": 1,
+                "firstName": "Ahmet",
+                "lastName": "Yılmaz",
+                "email": "ahmet@example.com",
+                "phoneNumber": "5551234567"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Credentials",
+            "body": {
+              "message": "E-posta veya şifre hatalı."
+            }
+          },
+          "403": {
+            "description": "Forbidden (Invalid User-Agent)",
+            "body": {
+              "message": "Erişim engellendi: Geçersiz User-Agent."
+            }
+          },
+          "429": {
+            "description": "Too Many Requests (Rate limit exceeded)",
+            "body": {
+              "message": "Çok fazla giriş denemesi yaptınız. Lütfen 15 dakika sonra tekrar deneyin."
+            }
+          }
+        }
+      }
+    },
+    "/api/catalogs": {
+      "get": {
+        "summary": "Get all catalogs",
+        "description": "Returns a list of catalog items, with URLs for vertical and horizontal thumbnails stored on the CDN.",
+        "headers": {
+          "User-Agent": "bible-appclient"
+        },
+        "responses": {
+          "200": {
+            "description": "A list of catalog items",
+            "body": [
+              {
+                "id": 1,
+                "name": "Visual Bible Catalog v1",
+                "description": "Holy Bible visual catalog containing illustrations and text guides.",
+                "thumbnailVertical": "https://cdn.biblecms.com/images/bible_vertical.jpg",
+                "thumbnailHorizontal": "https://cdn.biblecms.com/images/bible_horizontal.jpg",
+                "createdAt": "2026-06-15T09:42:26.117Z"
+              }
+            ]
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new catalog item with image upload",
+        "description": "Creates a new catalog entry and uploads vertical & horizontal thumbnail images using multer (multipart/form-data).",
+        "headers": {
+          "User-Agent": "bible-appclient",
+          "Content-Type": "multipart/form-data"
+        },
+        "body": {
+          "name": {
+            "type": "string",
+            "required": true,
+            "description": "Name of the catalog item (sanitized against XSS)"
+          },
+          "description": {
+            "type": "string",
+            "required": true,
+            "description": "Description of the catalog item (sanitized against XSS)"
+          },
+          "verticalImage": {
+            "type": "file",
+            "required": true,
+            "description": "Vertical cover image file"
+          },
+          "horizontalImage": {
+            "type": "file",
+            "required": true,
+            "description": "Horizontal cover image file"
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Catalog item successfully added",
+            "body": {
+              "message": "Katalog öğesi başarıyla eklendi.",
+              "catalog": {
+                "id": 2,
+                "name": "Visual Guide Book",
+                "description": "Kutsal Kitap görsel rehber kitabı",
+                "thumbnailVertical": "https://cdn.biblecms.com/images/1781516546526-401760592.png",
+                "thumbnailHorizontal": "https://cdn.biblecms.com/images/1781516546527-664315518.jpg",
+                "createdAt": "2026-06-15T09:42:26.528Z"
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error (missing fields or invalid files)",
+            "body": {
+              "message": "Lütfen tüm alanları doldurun (name, description, verticalImage, horizontalImage)."
+            }
+          }
+        }
+      }
+    }
+  }
+}

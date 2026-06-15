@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CatalogCMS | Admin Console</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">
+  
+  <style>
+    /* Clean File Upload Previews */
+    .preview-box {
+      border: 2px dashed #ced4da;
+      border-radius: 4px;
+      padding: 15px;
+      text-align: center;
+      background: #f8f9fa;
+      position: relative;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .preview-box:hover {
+      border-color: #17a2b8;
+      background: #f1f9fa;
+    }
+    .preview-img {
+      max-height: 120px;
+      max-width: 100%;
+      border-radius: 3px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      display: none;
+    }
+    .preview-placeholder {
+      color: #6c757d;
+      font-size: 13px;
+    }
+    .preview-placeholder i {
+      font-size: 28px;
+      margin-bottom: 6px;
+      color: #adb5bd;
+    }
+  </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link" onclick="$('#nav-stats').trigger('click'); return false;" data-i18n="home">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link" onclick="$('#nav-catalogs-list').trigger('click'); return false;" data-i18n="catalog">Catalog</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto align-items-center">
+      <!-- Language Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link font-weight-bold" data-toggle="dropdown" href="#" style="color: #495057;">
+          <i class="fas fa-globe text-info mr-1"></i>
+          <span id="currentLangLabel">Language</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right p-0">
+          <a href="#" class="dropdown-item lang-btn py-2 active" data-lang="en">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/us.svg" style="width: 16px; margin-right: 8px;" alt="US Flag"> English
+          </a>
+          <a href="#" class="dropdown-item lang-btn py-2" data-lang="tr">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/tr.svg" style="width: 16px; margin-right: 8px;" alt="TR Flag"> Türkçe
+          </a>
+          <a href="#" class="dropdown-item lang-btn py-2" data-lang="de">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/de.svg" style="width: 16px; margin-right: 8px;" alt="DE Flag"> Deutsch
+          </a>
+          <a href="#" class="dropdown-item lang-btn py-2" data-lang="es">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/es.svg" style="width: 16px; margin-right: 8px;" alt="ES Flag"> Español
+          </a>
+          <a href="#" class="dropdown-item lang-btn py-2" data-lang="fr">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/fr.svg" style="width: 16px; margin-right: 8px;" alt="FR Flag"> Français
+          </a>
+          <a href="#" class="dropdown-item lang-btn py-2" data-lang="it">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/it.svg" style="width: 16px; margin-right: 8px;" alt="IT Flag"> Italiano
+          </a>
+        </div>
+      </li>
+
+      <!-- User Dropdown Menu -->
+      <li class="nav-item dropdown user-menu">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+          <img src="https://ui-avatars.com/api/?name=Admin&background=17a2b8&color=fff&rounded=true" class="user-image img-circle elevation-2" alt="User Image" id="userNavbarAvatarImg">
+          <span class="d-none d-md-inline" id="userNameDisplay">Loading...</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <!-- User image -->
+          <li class="user-header bg-info">
+            <img src="https://ui-avatars.com/api/?name=Admin&background=17a2b8&color=fff&rounded=true" class="img-circle elevation-2" alt="User Image" id="userDropdownAvatarImg">
+            <p>
+              <span id="userDropdownName">Administrator</span>
+              <small data-i18n="systemOperator">System Operator</small>
+            </p>
+          </li>
+          <!-- Menu Footer-->
+          <li class="user-footer">
+            <a href="#" class="btn btn-default btn-flat text-muted"><i class="fas fa-user-cog"></i> <span data-i18n="profile">Profile</span></a>
+            <a href="#" id="logoutBtn" class="btn btn-default btn-flat float-right text-danger"><i class="fas fa-sign-out-alt"></i> <span data-i18n="logout">Logout</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <i class="fas fa-layer-group text-info ml-3 mr-2" style="font-size: 20px;"></i>
+      <span class="brand-text font-weight-light"><b>Catalog</b>CMS</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
+        <div class="image">
+          <img src="https://ui-avatars.com/api/?name=Admin&background=17a2b8&color=fff&rounded=true" class="img-circle elevation-2" alt="User Image" id="sidebarAvatarImg">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" id="sidebarUserName" data-i18n="systemUser">System User</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="#" class="nav-link active" id="nav-stats">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p data-i18n="dashboardOverview">Dashboard Overview</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="nav-catalogs-list">
+              <i class="nav-icon fas fa-list"></i>
+              <p data-i18n="catalogList">Catalog List</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="nav-add-catalog">
+              <i class="nav-icon fas fa-plus"></i>
+              <p data-i18n="addCatalogItem">Add Catalog Item</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="nav-security">
+              <i class="nav-icon fas fa-shield-alt"></i>
+              <p data-i18n="securityShield">Security Shield</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="nav-users">
+              <i class="nav-icon fas fa-users"></i>
+              <p data-i18n="users">Users</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="nav-payments">
+              <i class="nav-icon fas fa-credit-card"></i>
+              <p data-i18n="payments">Payments</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="nav-notifications">
+              <i class="nav-icon fas fa-bell"></i>
+              <p data-i18n="notifications">Notifications</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 font-weight-bold" id="pageTitle" style="color: #333;" data-i18n="dashboardOverview">Dashboard Overview</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#" onclick="$('#nav-stats').trigger('click'); return false;" data-i18n="home">Home</a></li>
+              <li class="breadcrumb-item active" id="breadcrumbActive" data-i18n="dashboardOverview">Dashboard Overview</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        
+        <!-- Section 1: Stats Overview -->
+        <div class="content-section" id="stats-section">
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3 id="catalogsCount">0</h3>
+                  <p data-i18n="totalCatalogItems">Total Catalog Items</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-book-open"></i>
+                </div>
+                <a href="#" class="small-box-footer" onclick="$('#nav-catalogs-list').trigger('click'); return false;"><span data-i18n="viewDetails">View Details</span> <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3 id="usersCount">0</h3>
+                  <p data-i18n="users">Users</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <a href="#" class="small-box-footer" onclick="$('#nav-users').trigger('click'); return false;"><span data-i18n="viewDetails">View Details</span> <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-warning">
+                <div class="inner" style="color: white !important;">
+                  <h3 style="color: white !important;" id="paymentsCount">0</h3>
+                  <p style="color: white !important;" data-i18n="payments">Payments</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-credit-card"></i>
+                </div>
+                <a href="#" class="small-box-footer" style="color: white !important;" onclick="$('#nav-payments').trigger('click'); return false;"><span data-i18n="viewDetails" style="color: white !important;">View Details</span> <i class="fas fa-arrow-circle-right" style="color: white !important;"></i></a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3 id="notificationsCount">0</h3>
+                  <p data-i18n="notifications">Notifications</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-bell"></i>
+                </div>
+                <a href="#" class="small-box-footer" onclick="$('#nav-notifications').trigger('click'); return false;"><span data-i18n="viewDetails">View Details</span> <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Welcome Jumbotron Card -->
+          <div class="card card-primary card-outline">
+            <div class="card-header d-flex align-items-center">
+              <i class="fas fa-info-circle text-info mr-2" style="font-size: 18px;"></i>
+              <h5 class="m-0 font-weight-bold" data-i18n="welcomeTitle">Visual Catalog System</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text text-muted" style="font-size: 15px; line-height: 1.6;" data-i18n="welcomeText">
+                Welcome to the CMS Admin Console. This user-friendly interface allows you to easily manage, filter, and organize visual catalog publications. All uploads automatically optimize and format to high-definition vertical/horizontal thumbnails. Security protocols like HTML injection protection and rate limit protection are active.
+              </p>
+              <div class="mt-3">
+                <a href="#" class="btn btn-info mr-2" onclick="$('#nav-catalogs-list').trigger('click'); return false;">
+                  <i class="fas fa-list mr-1"></i> <span data-i18n="browseCatalogList">Browse Catalog List</span>
+                </a>
+                <a href="#" class="btn btn-outline-secondary" onclick="$('#nav-add-catalog').trigger('click'); return false;">
+                  <i class="fas fa-plus mr-1"></i> <span data-i18n="addPublication">Add Publication</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Catalogs List -->
+        <div class="content-section d-none" id="catalogs-list-section">
+          <div class="card card-primary card-outline">
+            <div class="card-header">
+              <h3 class="card-title font-weight-bold text-dark m-0">
+                <i class="fas fa-folder-open text-warning mr-1"></i> <span data-i18n="registeredVisualPublications">Registered Visual Publications</span>
+              </h3>
+            </div>
+            <div class="card-body">
+              <table id="catalogsTable" class="table table-bordered table-striped table-hover w-100">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;" data-i18n="id">ID</th>
+                    <th data-i18n="publicationName">Publication Name</th>
+                    <th data-i18n="description">Description</th>
+                    <th style="width: 140px; text-align: center;" data-i18n="verticalCover">Vertical Cover (3:4)</th>
+                    <th style="width: 140px; text-align: center;" data-i18n="horizontalCover">Horizontal Cover (16:9)</th>
+                    <th style="width: 130px;" data-i18n="createdAt">Created At</th>
+                  </tr>
+                </thead>
+                <tbody id="catalogsTableBody">
+                  <!-- Loaded via AJAX -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Add Catalog Item -->
+        <div class="content-section d-none" id="add-catalog-section">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title font-weight-bold"><i class="fas fa-plus-circle mr-1"></i> <span data-i18n="addNewVisualPublication">Add New Visual Publication</span></h3>
+            </div>
+            <form id="addCatalogForm" enctype="multipart/form-data">
+              <div class="card-body">
+                <div id="add-catalog-alert"></div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="catalogName" class="font-weight-bold"><span data-i18n="publicationNameLabel">Publication Name</span> <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="catalogName" name="name" placeholder="e.g. Visual Book Guide" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="catalogDescription" class="font-weight-bold"><span data-i18n="descriptionSummaryLabel">Description / Summary</span> <span class="text-danger">*</span></label>
+                      <textarea class="form-control" id="catalogDescription" name="description" rows="1" placeholder="Enter short summary..." required style="height: 38px; min-height: 38px; max-height: 120px;"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="my-4">
+
+                <!-- Interactive cover previews -->
+                <div class="row">
+                  <!-- Vertical Cover file & preview -->
+                  <div class="col-md-6 mb-3">
+                    <label class="font-weight-bold d-block" data-i18n="verticalThumbnailCover">Vertical Thumbnail Cover *</label>
+                    <div class="custom-file mb-3">
+                      <input type="file" class="custom-file-input" id="verticalImage" name="verticalImage" accept="image/*" required>
+                      <label class="custom-file-label" for="verticalImage" data-i18n="chooseVerticalImage">Choose vertical image...</label>
+                    </div>
+                    <div class="preview-box" id="verticalPreviewContainer">
+                      <div class="preview-placeholder" id="verticalPlaceholder">
+                        <i class="fas fa-portrait"></i>
+                        <p class="m-0"><span data-i18n="verticalAspectRatio">Vertical Aspect Ratio (3:4 or Portrait)</span><br><span data-i18n="noImageSelected">No Image Selected</span></p>
+                      </div>
+                      <img id="verticalPreviewImg" class="preview-img" alt="Vertical Cover Preview">
+                    </div>
+                    <small class="form-text text-muted mt-1" data-i18n="acceptsFormats">Accepts PNG, JPG, JPEG, WEBP or GIF.</small>
+                  </div>
+
+                  <!-- Horizontal Cover file & preview -->
+                  <div class="col-md-6 mb-3">
+                    <label class="font-weight-bold d-block" data-i18n="horizontalBannerCover">Horizontal Banner Cover *</label>
+                    <div class="custom-file mb-3">
+                      <input type="file" class="custom-file-input" id="horizontalImage" name="horizontalImage" accept="image/*" required>
+                      <label class="custom-file-label" for="horizontalImage" data-i18n="chooseHorizontalImage">Choose horizontal image...</label>
+                    </div>
+                    <div class="preview-box" id="horizontalPreviewContainer">
+                      <div class="preview-placeholder" id="horizontalPlaceholder">
+                        <i class="fas fa-image"></i>
+                        <p class="m-0"><span data-i18n="horizontalAspectRatio">Horizontal Aspect Ratio (16:9 or Landscape)</span><br><span data-i18n="noImageSelected">No Image Selected</span></p>
+                      </div>
+                      <img id="horizontalPreviewImg" class="preview-img" alt="Horizontal Cover Preview">
+                    </div>
+                    <small class="form-text text-muted mt-1" data-i18n="acceptsFormats">Accepts PNG, JPG, JPEG, WEBP or GIF.</small>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer bg-light d-flex justify-content-end">
+                <button type="submit" class="btn btn-success px-4 elevation-1" id="submitBtn">
+                  <i class="fas fa-save mr-1"></i> <span data-i18n="saveUploadPublication">Save & Upload Publication</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Section 4: Security Specs -->
+        <div class="content-section d-none" id="security-section">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card card-dark">
+                <div class="card-header bg-dark">
+                  <h3 class="card-title font-weight-bold text-white"><i class="fas fa-user-shield mr-1"></i> <span data-i18n="middlewareSecurityGuard">Middleware Security Guard</span></h3>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex align-items-start mb-3">
+                    <i class="fas fa-shield-alt text-success mr-3 mt-1" style="font-size: 24px;"></i>
+                    <div>
+                      <h6 class="font-weight-bold m-0" data-i18n="helmetSecurity">Helmet Security Protection</h6>
+                      <p class="text-muted small" data-i18n="helmetText">Protects from clickjacking, MIME sniffing, and enforces modern secure HTTP headers.</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="d-flex align-items-start mb-3">
+                    <i class="fas fa-clock text-warning mr-3 mt-1" style="font-size: 24px;"></i>
+                    <div>
+                      <h6 class="font-weight-bold m-0" data-i18n="rateLimiterShield">Rate-Limiter Bruteforce Shield</h6>
+                      <p class="text-muted small" data-i18n="rateLimiterText">Limits auth endpoints to maximum 5 calls per 15 minutes to guarantee database stability and security.</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="d-flex align-items-start">
+                    <i class="fas fa-code-branch text-info mr-3 mt-1" style="font-size: 24px;"></i>
+                    <div>
+                      <h6 class="font-weight-bold m-0" data-i18n="strictSanitizer">Strict Input HTML/XSS Sanitizer</h6>
+                      <p class="text-muted small" data-i18n="strictSanitizerText">All user inputs (first name, last name, phone, email, publication descriptions) are parsed to prevent malicious script code execution.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card card-info">
+                <div class="card-header bg-info">
+                  <h3 class="card-title font-weight-bold"><i class="fas fa-info-circle mr-1"></i> <span data-i18n="systemSchemaIntegration">System Schema & Integration</span></h3>
+                </div>
+                <div class="card-body">
+                  <p class="text-muted" data-i18n="systemSchemaText">You can inspect full api configuration specs inside your workspace folders:</p>
+                  <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                      <div>
+                        <i class="fas fa-file-code text-primary mr-2"></i> <strong>openapi.json</strong>
+                        <span class="d-block text-muted small">OpenAPI 3.0 API Schema Standard</span>
+                      </div>
+                      <span class="badge badge-primary badge-pill">JSON Specs</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                      <div>
+                        <i class="fas fa-file-markdown text-success mr-2"></i> <strong>FETCH_DOCS.md</strong>
+                        <span class="d-block text-muted small">Fetch multipart/form-data integrations</span>
+                      </div>
+                      <span class="badge badge-success badge-pill">Markdown Guide</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                      <div>
+                        <i class="fas fa-vial text-warning mr-2"></i> <strong>test.js</strong>
+                        <span class="d-block text-muted small">Automated integration testing suit</span>
+                      </div>
+                      <span class="badge badge-warning badge-pill text-white">Supertest</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- API Endpoints Card -->
+          <div class="card card-primary card-outline mt-3">
+            <div class="card-header">
+              <h5 class="m-0 font-weight-bold text-dark"><i class="fas fa-network-wired text-primary mr-1"></i> API Endpoints Specification</h5>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped m-0">
+                  <thead>
+                    <tr class="bg-light text-secondary small font-weight-bold">
+                      <th style="width: 100px;">Method</th>
+                      <th>Endpoint</th>
+                      <th>Description</th>
+                      <th>Payload / Parameters</th>
+                      <th>Headers</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="badge badge-success px-2 py-1">POST</span></td>
+                      <td><code>/api/auth/register</code></td>
+                      <td>Register a new user with name, email, phone number, and password. Inputs are HTML-sanitized.</td>
+                      <td><code>{ firstName, lastName, email, phoneNumber, password }</code></td>
+                      <td><code>Content-Type: application/json</code></td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge-success px-2 py-1">POST</span></td>
+                      <td><code>/api/auth/login</code></td>
+                      <td>Authenticate and retrieve a JWT access token. Bruteforce rate-limited (5 requests / 15 mins).</td>
+                      <td><code>{ email, password }</code></td>
+                      <td><code>Content-Type: application/json</code></td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge-info px-2 py-1">GET</span></td>
+                      <td><code>/api/catalogs</code></td>
+                      <td>List all visual catalog publications in the database.</td>
+                      <td><em>None</em></td>
+                      <td><code>User-Agent: bible-appclient</code></td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge-success px-2 py-1">POST</span></td>
+                      <td><code>/api/catalogs</code></td>
+                      <td>Add a new visual publication. Dual image uploads (vertical/horizontal thumbnails).</td>
+                      <td>FormData: <code>name</code>, <code>description</code>, <code>verticalImage</code>, <code>horizontalImage</code></td>
+                      <td><code>User-Agent: bible-appclient</code></td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge-info px-2 py-1">GET</span></td>
+                      <td><code>/api/locales</code></td>
+                      <td>Retrieve the dictionary containing multi-language translation locales dynamically.</td>
+                      <td><em>None</em></td>
+                      <td><code>User-Agent: bible-appclient</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Section 5: Users List -->
+        <div class="content-section d-none" id="users-section">
+          <div class="card card-info card-outline">
+            <div class="card-header">
+              <h3 class="card-title font-weight-bold text-dark m-0">
+                <i class="fas fa-users text-info mr-1"></i> <span data-i18n="users">Users</span>
+              </h3>
+            </div>
+            <div class="card-body">
+              <table id="usersTable" class="table table-bordered table-striped table-hover w-100">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;">ID</th>
+                    <th><span data-i18n="firstName">First Name</span> & <span data-i18n="lastName">Last Name</span></th>
+                    <th data-i18n="email">Email</th>
+                    <th data-i18n="phoneNumber">Phone Number</th>
+                    <th style="width: 130px;" data-i18n="createdAt">Created At</th>
+                    <th style="width: 150px; text-align: center;" data-i18n="action">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                  <!-- Loaded via AJAX -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6: Payments List -->
+        <div class="content-section d-none" id="payments-section">
+          <div class="card card-success card-outline">
+            <div class="card-header">
+              <h3 class="card-title font-weight-bold text-dark m-0">
+                <i class="fas fa-credit-card text-success mr-1"></i> <span data-i18n="payments">Payments</span>
+              </h3>
+            </div>
+            <div class="card-body">
+              <table id="paymentsTable" class="table table-bordered table-striped table-hover w-100">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;">ID</th>
+                    <th>User ID</th>
+                    <th data-i18n="email">Email</th>
+                    <th data-i18n="productId">Product ID</th>
+                    <th data-i18n="amount">Amount</th>
+                    <th data-i18n="currency">Currency</th>
+                    <th data-i18n="status">Status</th>
+                    <th data-i18n="transactionId">Transaction ID</th>
+                    <th style="width: 130px;" data-i18n="createdAt">Created At</th>
+                  </tr>
+                </thead>
+                <tbody id="paymentsTableBody">
+                  <!-- Loaded via AJAX -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 7: Notifications List -->
+        <div class="content-section d-none" id="notifications-section">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title font-weight-bold"><i class="fas fa-paper-plane mr-1"></i> <span data-i18n="sendNotification">Send Notification</span></h3>
+                </div>
+                <form id="sendNotificationForm">
+                  <div class="card-body">
+                    <div id="notification-alert"></div>
+                    <div class="form-group">
+                      <label for="notifTitle" class="font-weight-bold" data-i18n="notificationTitle">Notification Title</label>
+                      <input type="text" class="form-control" id="notifTitle" required placeholder="Welcome!">
+                    </div>
+                    <div class="form-group">
+                      <label for="notifMessage" class="font-weight-bold" data-i18n="notificationMessage">Notification Message</label>
+                      <textarea class="form-control" id="notifMessage" rows="3" required placeholder="Message content..."></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="notifType" class="font-weight-bold" data-i18n="notificationType">Notification Type</label>
+                      <select class="form-control" id="notifType">
+                        <option value="info" selected>Info</option>
+                        <option value="success">Success</option>
+                        <option value="warning">Warning</option>
+                        <option value="danger">Danger</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="notifSentTo" class="font-weight-bold" data-i18n="sentTo">Sent To</label>
+                      <input type="text" class="form-control" id="notifSentTo" placeholder="all" value="all" required>
+                    </div>
+                  </div>
+                  <div class="card-footer bg-light">
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane mr-1"></i> <span data-i18n="sendNotification">Send Notification</span></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card card-primary card-outline">
+                <div class="card-header">
+                  <h3 class="card-title font-weight-bold text-dark m-0">
+                    <i class="fas fa-bell text-info mr-1"></i> <span data-i18n="notifications">Notifications</span>
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <table id="notificationsTable" class="table table-bordered table-striped table-hover w-100">
+                    <thead>
+                      <tr>
+                        <th style="width: 50px;">ID</th>
+                        <th data-i18n="notificationTitle">Title</th>
+                        <th data-i18n="notificationMessage">Message</th>
+                        <th data-i18n="notificationType">Type</th>
+                        <th data-i18n="sentTo">Sent To</th>
+                        <th style="width: 130px;" data-i18n="createdAt">Created At</th>
+                        <th style="width: 80px; text-align: center;" data-i18n="action">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="notificationsTableBody">
+                      <!-- Loaded via AJAX -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-inline">
+      CatalogCMS v1.0.0
+    </div>
+    <strong>Copyright &copy; 2026 <a href="#" class="text-info">CatalogCMS</a>.</strong> <span data-i18n="welcomeTitle">Visual Catalog System</span>
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- bs-custom-file-input -->
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+<!-- AdminLTE App -->
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<!-- DataTables & Plugins -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
+
+<script>
+  // Dynamic Localization Dictionary fetched from Endpoint
+  let locales = {};
+  let currentLang = localStorage.getItem('lang') || 'en';
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    
+    // Toggle active classes on dropdown buttons
+    $('.lang-btn').removeClass('active');
+    $(`.lang-btn[data-lang="${lang}"]`).addClass('active');
+
+    if (!locales[lang]) return;
+
+    // Update translations
+    $('[data-i18n]').each(function() {
+      const key = $(this).attr('data-i18n');
+      if (locales[lang] && locales[lang][key] !== undefined) {
+        $(this).text(locales[lang][key]);
+      }
+    });
+
+    // Update placeholders and custom fields
+    $('#catalogSearchInput').attr('placeholder', locales[lang].searchPublications);
+    $('#catalogName').attr('placeholder', locales[lang].publicationNameLabel);
+    $('#catalogDescription').attr('placeholder', locales[lang].descriptionSummaryLabel || locales[lang].descriptionSummaryLabel);
+
+    // Refresh Active Sidebar text
+    const activeText = $('.nav-sidebar .nav-link.active').find('p').attr('data-i18n');
+    if (activeText && locales[lang][activeText]) {
+      $('#pageTitle').text(locales[lang][activeText]);
+      $('#breadcrumbActive').text(locales[lang][activeText]);
+    }
+  }
+
+  function initLocalization() {
+    $.ajax({
+      url: '/api/locales',
+      type: 'GET',
+      success: function(data) {
+        locales = data;
+        applyLanguage(currentLang);
+        loadCatalogs();
+      },
+      error: function(xhr) {
+        console.error('Failed to load dictionary dynamically', xhr);
+        // Fallback minimal dictionary
+        locales = {
+          en: {
+            home: "Home", catalog: "Catalog", systemOperator: "System Operator", profile: "Profile", logout: "Logout",
+            systemUser: "System User", dashboardOverview: "Dashboard Overview", catalogList: "Catalog List",
+            addCatalogItem: "Add Catalog Item", securityShield: "Security Shield", totalCatalogItems: "Total Catalog Items",
+            apiServiceStatus: "API Service Status", multipartUploadActive: "Multipart Upload Active", protectedLabel: "Protected",
+            xssBruteforceShield: "XSS & Bruteforce Shield", viewDetails: "View Details", checkProtection: "Check Protection",
+            uploadCover: "Upload Cover", securitySpecs: "Security Specs", welcomeTitle: "Visual Catalog System",
+            welcomeText: "Welcome to the CMS Admin Console. This user-friendly interface allows you to easily manage, filter, and organize visual catalog publications.", browseCatalogList: "Browse Catalog List", addPublication: "Add Publication",
+            registeredVisualPublications: "Registered Visual Publications", searchPublications: "Search...",
+            id: "ID", publicationName: "Name", description: "Description", verticalCover: "Vertical Cover (3:4)",
+            horizontalCover: "Horizontal Cover (16:9)", createdAt: "Created At", noPublicationsFound: "No publications found.",
+            noPublicationsMatch: "No matching publications.", addNewVisualPublication: "Add Publication",
+            publicationNameLabel: "Publication Name", descriptionSummaryLabel: "Description", verticalThumbnailCover: "Vertical Thumbnail Cover *",
+            horizontalBannerCover: "Horizontal Banner Cover *", chooseVerticalImage: "Choose image...",
+            chooseHorizontalImage: "Choose image...", verticalAspectRatio: "Vertical (3:4)", horizontalAspectRatio: "Horizontal (16:9)",
+            noImageSelected: "No Image Selected", acceptsFormats: "Accepts formats.", saveUploadPublication: "Save & Upload",
+            middlewareSecurityGuard: "Security Guard", helmetSecurity: "Helmet Security", helmetText: "Helmet protection.",
+            rateLimiterShield: "Rate Limiter", rateLimiterText: "Rate limits active.", strictSanitizer: "Strict Sanitizer",
+            strictSanitizerText: "XSS sanitizer active.", systemSchemaIntegration: "Schema specs", systemSchemaText: "Schema files."
+          }
+        };
+        applyLanguage(currentLang);
+        loadCatalogs();
+      }
+    });
+  }
+
+  // Section switcher helper
+  function showSection(sectionId, navLinkId) {
+    // Hide all sections
+    $('.content-section').addClass('d-none');
+    // Show active section
+    $(`#${sectionId}`).removeClass('d-none');
+    
+    // Update active nav-link
+    $('.nav-sidebar .nav-link').removeClass('active');
+    $(`#${navLinkId}`).addClass('active');
+
+    // Update titles & breadcrumbs
+    const activeText = $(`#${navLinkId}`).find('p').attr('data-i18n');
+    if (activeText && locales[currentLang] && locales[currentLang][activeText]) {
+      $('#pageTitle').text(locales[currentLang][activeText]);
+      $('#breadcrumbActive').text(locales[currentLang][activeText]);
+    }
+  }
+
+  $(document).ready(function() {
+    // Initialize file input labels
+    bsCustomFileInput.init();
+
+    // Check token
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user'));
+    
+    if (!token || !user) {
+      window.location.href = '/login';
+      return;
+    }
+
+    // Dynamic Avatar generation via UI-Avatars for clean standard alignment
+    const firstName = user.firstName || 'Admin';
+    const lastName = user.lastName || 'User';
+    const cleanFirstName = $('<div/>').html(firstName).text(); // clean XSS tags visually
+    const cleanUserFullName = `${cleanFirstName} ${lastName}`;
+    const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(cleanUserFullName)}&background=17a2b8&color=fff&rounded=true&bold=true`;
+
+    $('#sidebarAvatarImg').attr('src', avatarUrl);
+    $('#userNavbarAvatarImg').attr('src', avatarUrl);
+    $('#userDropdownAvatarImg').attr('src', avatarUrl);
+    
+    $('#userNameDisplay').text(cleanUserFullName);
+    $('#userDropdownName').text(cleanUserFullName);
+    $('#sidebarUserName').text(cleanUserFullName);
+
+    // Update dashboard metrics
+    function updateDashboardStats() {
+      $.ajax({
+        url: '/api/catalogs',
+        type: 'GET',
+        success: function(res) {
+          $('#catalogsCount').text(res.length);
+        }
+      });
+      $.ajax({
+        url: '/api/users',
+        type: 'GET',
+        success: function(res) {
+          $('#usersCount').text(res.length);
+        }
+      });
+      $.ajax({
+        url: '/api/payments',
+        type: 'GET',
+        success: function(res) {
+          $('#paymentsCount').text(res.length);
+        }
+      });
+      $.ajax({
+        url: '/api/notifications',
+        type: 'GET',
+        success: function(res) {
+          $('#notificationsCount').text(res.length);
+        }
+      });
+    }
+
+    // Section Switching Handlers
+    $('#nav-stats').click(function(e) {
+      e.preventDefault();
+      showSection('stats-section', 'nav-stats');
+      updateDashboardStats();
+    });
+    $('#nav-catalogs-list').click(function(e) {
+      e.preventDefault();
+      showSection('catalogs-list-section', 'nav-catalogs-list');
+      loadCatalogs();
+    });
+    $('#nav-add-catalog').click(function(e) {
+      e.preventDefault();
+      showSection('add-catalog-section', 'nav-add-catalog');
+    });
+    $('#nav-security').click(function(e) {
+      e.preventDefault();
+      showSection('security-section', 'nav-security');
+    });
+    $('#nav-users').click(function(e) {
+      e.preventDefault();
+      showSection('users-section', 'nav-users');
+      loadUsers();
+    });
+    $('#nav-payments').click(function(e) {
+      e.preventDefault();
+      showSection('payments-section', 'nav-payments');
+      loadPayments();
+    });
+    $('#nav-notifications').click(function(e) {
+      e.preventDefault();
+      showSection('notifications-section', 'nav-notifications');
+      loadNotifications();
+    });
+
+    // Language switcher click events
+    $('.lang-btn').click(function(e) {
+      e.preventDefault();
+      const lang = $(this).attr('data-lang');
+      applyLanguage(lang);
+      
+      // Reload active tab data
+      if ($('#nav-catalogs-list').hasClass('active')) loadCatalogs();
+      if ($('#nav-users').hasClass('active')) loadUsers();
+      if ($('#nav-payments').hasClass('active')) loadPayments();
+      if ($('#nav-notifications').hasClass('active')) loadNotifications();
+      updateDashboardStats();
+    });
+
+    // Initialize Localization
+    initLocalization();
+    updateDashboardStats();
+
+    // Logout function
+    $('#logoutBtn').click(function(e) {
+      e.preventDefault();
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/login';
+    });
+
+    // Image Previews Event Listeners
+    function readURL(input, imgElementId, placeholderId) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          $(`#${imgElementId}`).attr('src', e.target.result).show();
+          $(`#${placeholderId}`).hide();
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $('#verticalImage').change(function() {
+      readURL(this, 'verticalPreviewImg', 'verticalPlaceholder');
+    });
+
+    $('#horizontalImage').change(function() {
+      readURL(this, 'horizontalPreviewImg', 'horizontalPlaceholder');
+    });
+
+    // Load Catalogs Function
+    window.loadCatalogs = function() {
+      // Destroy existing datatable instance if it exists to allow full re-population
+      if ($.fn.DataTable.isDataTable('#catalogsTable')) {
+        $('#catalogsTable').DataTable().destroy();
+      }
+
+      $.ajax({
+        url: '/api/catalogs',
+        type: 'GET',
+        success: function(catalogs) {
+          $('#catalogsCount').text(catalogs.length);
+          let rows = '';
+          
+          catalogs.forEach(catalog => {
+            const date = new Date(catalog.createdAt).toLocaleDateString(currentLang === 'tr' ? 'tr-TR' : 'en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            });
+            
+            // Map uploaded local file or absolute CDN url
+            const verticalURL = catalog.thumbnailVertical.startsWith('https://cdn.biblecms.com') && !catalog.thumbnailVertical.includes('bible_vertical')
+              ? '/uploads/' + catalog.thumbnailVertical.split('/').pop() 
+              : catalog.thumbnailVertical;
+              
+            const horizontalURL = catalog.thumbnailHorizontal.startsWith('https://cdn.biblecms.com') && !catalog.thumbnailHorizontal.includes('bible_horizontal')
+              ? '/uploads/' + catalog.thumbnailHorizontal.split('/').pop()
+              : catalog.thumbnailHorizontal;
+
+            const viewText = currentLang === 'tr' ? 'Görüntüle' : 'View';
+
+            rows += `
+              <tr>
+                <td><span class="badge badge-dark">${catalog.id}</span></td>
+                <td><strong>${catalog.name}</strong></td>
+                <td><span class="text-secondary small">${catalog.description}</span></td>
+                <td class="text-center">
+                  <img src="${verticalURL}" class="img-thumbnail preview-trigger" style="max-height: 55px; object-fit: contain; cursor: pointer;" data-title="${catalog.name} - Cover" href="${verticalURL}" onerror="this.src='https://via.placeholder.com/60x80?text=Cover'">
+                  <br>
+                  <a href="${verticalURL}" class="btn btn-xs btn-link text-info mt-1 preview-trigger" data-title="${catalog.name} - Cover"><i class="fas fa-expand"></i> ${viewText} Cover</a>
+                </td>
+                <td class="text-center">
+                  <img src="${horizontalURL}" class="img-thumbnail preview-trigger" style="max-height: 55px; object-fit: contain; cursor: pointer;" data-title="${catalog.name} - Banner" href="${horizontalURL}" onerror="this.src='https://via.placeholder.com/120x70?text=Banner'">
+                  <br>
+                  <a href="${horizontalURL}" class="btn btn-xs btn-link text-info mt-1 preview-trigger" data-title="${catalog.name} - Banner"><i class="fas fa-expand"></i> ${viewText} Banner</a>
+                </td>
+                <td><small class="text-muted"><i class="far fa-calendar-alt mr-1"></i> ${date}</small></td>
+              </tr>
+            `;
+          });
+          
+          $('#catalogsTableBody').html(rows);
+
+          // Build localization settings for DataTables
+          const trLangConfig = {
+            "search": "Ara:",
+            "lengthMenu": "_MENU_ kayıt göster",
+            "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+            "infoEmpty": "Kayıt yok",
+            "infoFiltered": "(_MAX_ kayıt içerisinden filtrelendi)",
+            "zeroRecords": "Eşleşen kayıt bulunamadı",
+            "paginate": {
+              "first": "İlk",
+              "last": "Son",
+              "next": "Sonraki",
+              "previous": "Önceki"
+            }
+          };
+
+          const enLangConfig = {
+            "search": "Search:",
+            "lengthMenu": "Show _MENU_ entries",
+            "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+            "infoEmpty": "Showing 0 to 0 of 0 entries",
+            "infoFiltered": "(filtered from _MAX_ total entries)",
+            "zeroRecords": "No matching records found",
+            "paginate": {
+              "first": "First",
+              "last": "Last",
+              "next": "Next",
+              "previous": "Previous"
+            }
+          };
+
+          // Initialize DataTable with settings
+          $('#catalogsTable').DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            "pageLength": 5,
+            "lengthMenu": [5, 10, 25, 50],
+            "language": currentLang === 'tr' ? trLangConfig : enLangConfig
+          });
+        },
+        error: function(xhr) {
+          console.error('Failed to load catalogs', xhr);
+        }
+      });
+    }
+
+    // Add Catalog Form Submission (Multipart)
+    $('#addCatalogForm').submit(function(e) {
+      e.preventDefault();
+      
+      const submitBtn = $('#submitBtn');
+      const savingText = currentLang === 'tr' ? 'Yükleniyor...' : 'Uploading...';
+      submitBtn.attr('disabled', true).html(`<i class="fas fa-spinner fa-spin mr-1"></i> ${savingText}`);
+
+      const formData = new FormData();
+      formData.append('name', $('#catalogName').val());
+      formData.append('description', $('#catalogDescription').val());
+      formData.append('verticalImage', $('#verticalImage')[0].files[0]);
+      formData.append('horizontalImage', $('#horizontalImage')[0].files[0]);
+
+      $.ajax({
+        url: '/api/catalogs',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          const successHeader = currentLang === 'tr' ? 'Başarılı!' : 'Success!';
+          const successMsg = locales[currentLang] ? locales[currentLang].successMessage : 'Success!';
+          $('#add-catalog-alert').html(`
+            <div class="alert alert-success alert-dismissible elevation-1">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h5><i class="icon fas fa-check-circle"></i> ${successHeader}</h5>
+              ${successMsg}
+            </div>
+          `);
+          
+          // Reset form
+          $('#addCatalogForm')[0].reset();
+          
+          // Reset preview boxes
+          $('#verticalPreviewImg').hide();
+          $('#verticalPlaceholder').show();
+          $('#horizontalPreviewImg').hide();
+          $('#horizontalPlaceholder').show();
+          bsCustomFileInput.init();
+          
+          // Reload catalogs list
+          loadCatalogs();
+          
+          // Switch to catalogs-list tab after short delay
+          setTimeout(() => {
+            showSection('catalogs-list-section', 'nav-catalogs-list');
+            $('#add-catalog-alert').html('');
+            submitBtn.attr('disabled', false).html(`<i class="fas fa-save mr-1"></i> ${locales[currentLang] ? locales[currentLang].saveUploadPublication : 'Save'}`);
+          }, 1500);
+        },
+        error: function(xhr) {
+          const failHeader = locales[currentLang] ? locales[currentLang].uploadFailed : 'Upload Failed';
+          const message = xhr.responseJSON ? xhr.responseJSON.message : (currentLang === 'tr' ? 'Bir hata oluştu.' : 'An error occurred during upload.');
+          $('#add-catalog-alert').html(`
+            <div class="alert alert-danger alert-dismissible elevation-1">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h5><i class="icon fas fa-ban"></i> ${failHeader}</h5>
+              ${message}
+            </div>
+          `);
+          submitBtn.attr('disabled', false).html(`<i class="fas fa-save mr-1"></i> ${locales[currentLang] ? locales[currentLang].saveUploadPublication : 'Save'}`);
+        }
+      });
+    });
+
+    // Users Section Functions
+    window.loadUsers = function() {
+      if ($.fn.DataTable.isDataTable('#usersTable')) {
+        $('#usersTable').DataTable().destroy();
+      }
+
+      $.ajax({
+        url: '/api/users',
+        type: 'GET',
+        success: function(users) {
+          let rows = '';
+          users.forEach(u => {
+            const date = new Date(u.createdAt).toLocaleDateString(currentLang === 'tr' ? 'tr-TR' : 'en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            });
+            const editLabel = currentLang === 'tr' ? 'Düzenle' : 'Edit';
+            const deleteLabel = currentLang === 'tr' ? 'Sil' : 'Delete';
+            
+            rows += `
+              <tr>
+                <td><span class="badge badge-secondary">${u.id}</span></td>
+                <td><strong>${u.firstName} ${u.lastName}</strong></td>
+                <td><code>${u.email}</code></td>
+                <td>${u.phoneNumber}</td>
+                <td><small class="text-muted"><i class="far fa-calendar-alt mr-1"></i> ${date}</small></td>
+                <td class="text-center">
+                  <button class="btn btn-sm btn-info mr-1" onclick="openEditUserModal(${u.id}, '${escapeHtml(u.firstName)}', '${escapeHtml(u.lastName)}', '${escapeHtml(u.email)}', '${escapeHtml(u.phoneNumber)}')"><i class="fas fa-edit"></i> ${editLabel}</button>
+                  <button class="btn btn-sm btn-danger" onclick="deleteUser(${u.id})"><i class="fas fa-trash"></i> ${deleteLabel}</button>
+                </td>
+              </tr>
+            `;
+          });
+          $('#usersTableBody').html(rows);
+
+          $('#usersTable').DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            "pageLength": 10,
+            "language": currentLang === 'tr' ? {
+              "search": "Ara:",
+              "lengthMenu": "_MENU_ kayıt göster",
+              "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+              "zeroRecords": "Eşleşen kullanıcı bulunamadı"
+            } : {
+              "search": "Search:",
+              "lengthMenu": "Show _MENU_ entries",
+              "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+              "zeroRecords": "No matching users found"
+            }
+          });
+          updateDashboardStats();
+        },
+        error: function(err) {
+          console.error('Failed to load users', err);
+        }
+      });
+    };
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"').replace(/'/g, '&#039;');
+    }
+
+    window.openEditUserModal = function(id, firstName, lastName, email, phoneNumber) {
+      $('#editUserId').val(id);
+      $('#editFirstName').val(firstName);
+      $('#editLastName').val(lastName);
+      $('#editEmail').val(email);
+      $('#editPhoneNumber').val(phoneNumber);
+      $('#editPassword').val('');
+      $('#edit-user-alert').html('');
+      $('#editUserModal').modal('show');
+    };
+
+    $('#editUserForm').submit(function(e) {
+      e.preventDefault();
+      const id = $('#editUserId').val();
+      const payload = {
+        firstName: $('#editFirstName').val(),
+        lastName: $('#editLastName').val(),
+        email: $('#editEmail').val(),
+        phoneNumber: $('#editPhoneNumber').val()
+      };
+      const newPwd = $('#editPassword').val();
+      if (newPwd) {
+        payload.password = newPwd;
+      }
+
+      $.ajax({
+        url: `/api/users/${id}`,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(payload),
+        success: function() {
+          $('#editUserModal').modal('hide');
+          loadUsers();
+        },
+        error: function(xhr) {
+          const msg = xhr.responseJSON ? xhr.responseJSON.message : 'Error updating user';
+          $('#edit-user-alert').html(`<div class="alert alert-danger">${msg}</div>`);
+        }
+      });
+    });
+
+    window.deleteUser = function(id) {
+      const confirmMsg = currentLang === 'tr' ? 'Bu kullanıcıyı silmek istediğinize emin misiniz?' : 'Are you sure you want to delete this user?';
+      if (!confirm(confirmMsg)) return;
+
+      $.ajax({
+        url: `/api/users/${id}`,
+        type: 'DELETE',
+        success: function() {
+          loadUsers();
+        },
+        error: function(xhr) {
+          alert(xhr.responseJSON ? xhr.responseJSON.message : 'Error deleting user');
+        }
+      });
+    };
+
+    // Payments Section Functions
+    window.loadPayments = function() {
+      if ($.fn.DataTable.isDataTable('#paymentsTable')) {
+        $('#paymentsTable').DataTable().destroy();
+      }
+
+      $.ajax({
+        url: '/api/payments',
+        type: 'GET',
+        success: function(payments) {
+          let rows = '';
+          payments.forEach(p => {
+            const date = new Date(p.createdAt).toLocaleDateString(currentLang === 'tr' ? 'tr-TR' : 'en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            });
+            const statusBadge = p.status === 'completed' 
+              ? '<span class="badge badge-success">Completed</span>' 
+              : `<span class="badge badge-warning">${p.status}</span>`;
+
+            rows += `
+              <tr>
+                <td><span class="badge badge-dark">${p.id}</span></td>
+                <td><span class="badge badge-secondary">User #${p.userId}</span></td>
+                <td><code>${p.userEmail}</code></td>
+                <td><strong>${p.productId}</strong></td>
+                <td><code>${p.amount.toFixed(2)}</code></td>
+                <td><span class="badge badge-info">${p.currency}</span></td>
+                <td>${statusBadge}</td>
+                <td><span class="text-secondary font-weight-bold small">${p.transactionId}</span></td>
+                <td><small class="text-muted"><i class="far fa-calendar-alt mr-1"></i> ${date}</small></td>
+              </tr>
+            `;
+          });
+          $('#paymentsTableBody').html(rows);
+
+          $('#paymentsTable').DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            "pageLength": 10,
+            "language": currentLang === 'tr' ? {
+              "search": "Ara:",
+              "lengthMenu": "_MENU_ kayıt göster",
+              "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+              "zeroRecords": "Eşleşen ödeme bulunamadı"
+            } : {
+              "search": "Search:",
+              "lengthMenu": "Show _MENU_ entries",
+              "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+              "zeroRecords": "No matching payments found"
+            }
+          });
+          updateDashboardStats();
+        },
+        error: function(err) {
+          console.error('Failed to load payments', err);
+        }
+      });
+    };
+
+    // Notifications Section Functions
+    window.loadNotifications = function() {
+      if ($.fn.DataTable.isDataTable('#notificationsTable')) {
+        $('#notificationsTable').DataTable().destroy();
+      }
+
+      $.ajax({
+        url: '/api/notifications',
+        type: 'GET',
+        success: function(notifications) {
+          let rows = '';
+          notifications.forEach(n => {
+            const date = new Date(n.createdAt).toLocaleDateString(currentLang === 'tr' ? 'tr-TR' : 'en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            });
+            const typeBadge = `<span class="badge badge-${n.type === 'danger' ? 'danger' : n.type === 'success' ? 'success' : n.type === 'warning' ? 'warning' : 'info'}">${n.type.toUpperCase()}</span>`;
+            const deleteLabel = currentLang === 'tr' ? 'Sil' : 'Delete';
+            
+            rows += `
+              <tr>
+                <td><span class="badge badge-dark">${n.id}</span></td>
+                <td><strong>${n.title}</strong></td>
+                <td><span class="text-secondary small">${n.message}</span></td>
+                <td>${typeBadge}</td>
+                <td><code>${n.sentTo}</code></td>
+                <td><small class="text-muted"><i class="far fa-calendar-alt mr-1"></i> ${date}</small></td>
+                <td class="text-center">
+                  <button class="btn btn-sm btn-danger" onclick="deleteNotification(${n.id})"><i class="fas fa-trash"></i> ${deleteLabel}</button>
+                </td>
+              </tr>
+            `;
+          });
+          $('#notificationsTableBody').html(rows);
+
+          $('#notificationsTable').DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            "pageLength": 10,
+            "language": currentLang === 'tr' ? {
+              "search": "Ara:",
+              "lengthMenu": "_MENU_ kayıt göster",
+              "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+              "zeroRecords": "Eşleşen bildirim bulunamadı"
+            } : {
+              "search": "Search:",
+              "lengthMenu": "Show _MENU_ entries",
+              "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+              "zeroRecords": "No matching notifications found"
+            }
+          });
+          updateDashboardStats();
+        },
+        error: function(err) {
+          console.error('Failed to load notifications', err);
+        }
+      });
+    };
+
+    $('#sendNotificationForm').submit(function(e) {
+      e.preventDefault();
+      const payload = {
+        title: $('#notifTitle').val(),
+        message: $('#notifMessage').val(),
+        type: $('#notifType').val(),
+        sentTo: $('#notifSentTo').val()
+      };
+
+      $.ajax({
+        url: '/api/notifications',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(payload),
+        success: function() {
+          $('#sendNotificationForm')[0].reset();
+          $('#notifSentTo').val('all');
+          loadNotifications();
+        },
+        error: function(xhr) {
+          const msg = xhr.responseJSON ? xhr.responseJSON.message : 'Error sending notification';
+          $('#notification-alert').html(`<div class="alert alert-danger">${msg}</div>`);
+        }
+      });
+    });
+
+    window.deleteNotification = function(id) {
+      const confirmMsg = currentLang === 'tr' ? 'Bu bildirimi silmek istediğinize emin misiniz?' : 'Are you sure you want to delete this notification?';
+      if (!confirm(confirmMsg)) return;
+
+      $.ajax({
+        url: `/api/notifications/${id}`,
+        type: 'DELETE',
+        success: function() {
+          loadNotifications();
+        },
+        error: function(xhr) {
+          alert(xhr.responseJSON ? xhr.responseJSON.message : 'Error deleting notification');
+        }
+      });
+    };
+
+    // Image Preview Modal Handler
+    $(document).on('click', '.preview-trigger', function(e) {
+      e.preventDefault();
+      const imageUrl = $(this).attr('href') || $(this).attr('src');
+      const title = $(this).attr('data-title') || 'Image Preview';
+      $('#previewImageSrc').attr('src', imageUrl);
+      $('#imagePreviewModalLabel').text(title);
+      $('#imagePreviewModal').modal('show');
+    });
+
+  });
+</script>
+
+<!-- Edit User Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-info">
+        <h5 class="modal-title text-white font-weight-bold" id="editUserModalLabel">Edit User</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="editUserForm">
+        <input type="hidden" id="editUserId">
+        <div class="modal-body">
+          <div id="edit-user-alert"></div>
+          <div class="form-group">
+            <label for="editFirstName" class="font-weight-bold" data-i18n="firstName">First Name</label>
+            <input type="text" class="form-control" id="editFirstName" required>
+          </div>
+          <div class="form-group">
+            <label for="editLastName" class="font-weight-bold" data-i18n="lastName">Last Name</label>
+            <input type="text" class="form-control" id="editLastName" required>
+          </div>
+          <div class="form-group">
+            <label for="editEmail" class="font-weight-bold" data-i18n="email">Email</label>
+            <input type="email" class="form-control" id="editEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="editPhoneNumber" class="font-weight-bold" data-i18n="phoneNumber">Phone Number</label>
+            <input type="text" class="form-control" id="editPhoneNumber" required>
+          </div>
+          <div class="form-group">
+            <label for="editPassword" class="font-weight-bold" data-i18n="password">Password</label>
+            <input type="password" class="form-control" id="editPassword" placeholder="Leave blank to keep unchanged">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-i18n="close">Close</button>
+          <button type="submit" class="btn btn-info" data-i18n="saveChanges">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Image Preview Modal -->
+<div class="modal fade" id="imagePreviewModal" tabindex="-1" role="dialog" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content" style="background: transparent; border: none; box-shadow: none;">
+      <div class="modal-header" style="border: none; padding: 0 0 10px 0;">
+        <h5 class="modal-title text-white font-weight-bold" id="imagePreviewModalLabel">Image Preview</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="font-size: 30px; line-height: 24px; opacity: 0.8;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-0 text-center">
+        <img id="previewImageSrc" src="" class="img-fluid rounded shadow-lg" style="max-height: 80vh; max-width: 100%; object-fit: contain;">
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

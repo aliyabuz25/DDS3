@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BibleCMS | Sign In</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+  
+  <style>
+    /* GTranslate Custom Circular Switcher CSS */
+    .gtranslate_wrapper {
+      position: fixed !important;
+      bottom: 25px !important;
+      right: 25px !important;
+      z-index: 999999 !important;
+    }
+    .gtranslate_wrapper .switcher {
+      background: #17a2b8 !important; /* Info cyan color */
+      border-radius: 50% !important;
+      width: 55px !important;
+      height: 55px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25) !important;
+      border: none !important;
+      transition: all 0.3s ease !important;
+    }
+    .gtranslate_wrapper .switcher:hover {
+      transform: scale(1.05);
+      background: #138496 !important;
+    }
+    .gtranslate_wrapper .switcher .selected a {
+      padding: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 0 !important;
+    }
+    .gtranslate_wrapper .switcher .selected img {
+      width: 30px !important;
+      height: 30px !important;
+      border-radius: 50% !important;
+      object-fit: cover !important;
+      margin: 0 !important;
+      border: 2px solid white !important;
+    }
+    .gtranslate_wrapper .switcher .option {
+      position: absolute !important;
+      bottom: 65px !important;
+      right: 0 !important;
+      background: white !important;
+      border-radius: 10px !important;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15) !important;
+      width: 150px !important;
+      padding: 8px 0 !important;
+      border: 1px solid #ddd !important;
+      overflow: hidden !important;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s !important;
+    }
+    .gtranslate_wrapper .switcher:hover .option {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    .gtranslate_wrapper .switcher .option a {
+      display: flex !important;
+      align-items: center !important;
+      padding: 8px 15px !important;
+      color: #333 !important;
+      font-size: 14px !important;
+      text-decoration: none !important;
+      transition: background 0.2s !important;
+    }
+    .gtranslate_wrapper .switcher .option a:hover {
+      background: #f8f9fa !important;
+      color: #17a2b8 !important;
+    }
+    .gtranslate_wrapper .switcher .option img {
+      width: 20px !important;
+      height: 20px !important;
+      border-radius: 50% !important;
+      margin-right: 10px !important;
+      object-fit: cover !important;
+    }
+    .gtranslate_wrapper .switcher .selected a::after {
+      display: none !important;
+    }
+  </style>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#"><b>Bible</b>CMS</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+
+      <div id="alert-container"></div>
+
+      <form id="loginForm">
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Email" id="email" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password" id="password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- GTranslate.io Floating Language Picker -->
+<div class="gtranslate_wrapper"></div>
+<script>
+  window.gtranslateSettings = {
+    "default_language": "en",
+    "languages": ["en","tr","de","es","fr","it"],
+    "wrapper_selector": ".gtranslate_wrapper",
+    "flag_size": 24,
+    "alt_flags": {"en": "usa"},
+    "float_switcher_open_direction": "top",
+    "float_switcher_position": "bottom-right"
+  }
+</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    // If token exists, redirect to dashboard
+    if (localStorage.getItem('token')) {
+      window.location.href = '/dashboard';
+    }
+
+    $('#loginForm').submit(function(e) {
+      e.preventDefault();
+      
+      const email = $('#email').val();
+      const password = $('#password').val();
+
+      $.ajax({
+        url: '/api/login',
+        type: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'User-Agent': 'bible-appclient'
+        },
+        data: JSON.stringify({ email, password }),
+        success: function(response) {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+          
+          $('#alert-container').html(`
+            <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h5><i class="icon fas fa-check"></i> Success!</h5>
+              Redirecting to dashboard...
+            </div>
+          `);
+
+          setTimeout(() => {
+            window.location.href = '/dashboard';
+          }, 1000);
+        },
+        error: function(xhr) {
+          const message = xhr.responseJSON ? xhr.responseJSON.message : 'An error occurred.';
+          $('#alert-container').html(`
+            <div class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h5><i class="icon fas fa-ban"></i> Error!</h5>
+              ${message}
+            </div>
+          `);
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
