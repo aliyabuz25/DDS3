@@ -1359,6 +1359,10 @@
       $('#categoryModalLabel').text('Add Category');
       $('#categoryForm')[0].reset();
       $('#categoryId').val('');
+      $('#catImage').val('');
+      $('#catImageFile').val('');
+      $('#catImagePreviewContainer').hide();
+      $('#catImagePreview').attr('src', '');
       $('#categoryModal').modal('show');
     };
 
@@ -1372,21 +1376,42 @@
       $('#catImage').val(image);
       $('#catOrderIndex').val(orderIndex);
       $('#catIsPublished').val(isPublished ? 'true' : 'false');
+      $('#catImageFile').val('');
+      if (image) {
+        const displayImage = image.startsWith('https://cdn.biblecms.com')
+          ? '/uploads/' + image.split('/').pop()
+          : image;
+        $('#catImagePreview').attr('src', displayImage);
+        $('#catImagePreviewContainer').show();
+      } else {
+        $('#catImagePreviewContainer').hide();
+      }
       $('#categoryModal').modal('show');
     };
 
     $('#categoryForm').submit(function(e) {
       e.preventDefault();
       const id = $('#categoryId').val();
-      const payload = {
-        title: $('#catTitle').val(),
-        subtitle: $('#catSubtitle').val(),
-        type: $('#catType').val(),
-        count: parseInt($('#catCount').val() || 0),
-        image: $('#catImage').val(),
-        orderIndex: parseInt($('#catOrderIndex').val() || 0),
-        isPublished: $('#catIsPublished').val() === 'true'
-      };
+      const fileInput = $('#catImageFile')[0];
+      
+      if (!id && (!fileInput.files || fileInput.files.length === 0)) {
+        alert('Please select an image file to upload.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('title', $('#catTitle').val());
+      formData.append('subtitle', $('#catSubtitle').val());
+      formData.append('type', $('#catType').val());
+      formData.append('count', parseInt($('#catCount').val() || 0));
+      formData.append('orderIndex', parseInt($('#catOrderIndex').val() || 0));
+      formData.append('isPublished', $('#catIsPublished').val() === 'true');
+
+      if (fileInput.files && fileInput.files[0]) {
+        formData.append('image', fileInput.files[0]);
+      } else {
+        formData.append('image', $('#catImage').val());
+      }
 
       const url = id ? `/api/categories/${id}` : '/api/categories';
       const type = id ? 'PUT' : 'POST';
@@ -1394,8 +1419,9 @@
       $.ajax({
         url,
         type,
-        contentType: 'application/json',
-        data: JSON.stringify(payload),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function() {
           $('#categoryModal').modal('hide');
           loadCategories();
@@ -1455,6 +1481,10 @@
       $('#storyModalLabel').text('Add Story');
       $('#storyForm')[0].reset();
       $('#storyId').val('');
+      $('#storyImage').val('');
+      $('#storyImageFile').val('');
+      $('#storyImagePreviewContainer').hide();
+      $('#storyImagePreview').attr('src', '');
       $('#storyModal').modal('show');
     };
 
@@ -1473,26 +1503,47 @@
       $('#storyIsLocked').val(isLocked ? 'true' : 'false');
       $('#storyIsPublished').val(isPublished ? 'true' : 'false');
       $('#storyOrderIndex').val(orderIndex);
+      $('#storyImageFile').val('');
+      if (image) {
+        const displayImage = image.startsWith('https://cdn.biblecms.com')
+          ? '/uploads/' + image.split('/').pop()
+          : image;
+        $('#storyImagePreview').attr('src', displayImage);
+        $('#storyImagePreviewContainer').show();
+      } else {
+        $('#storyImagePreviewContainer').hide();
+      }
       $('#storyModal').modal('show');
     };
 
     $('#storyForm').submit(function(e) {
       e.preventDefault();
       const id = $('#storyId').val();
-      const payload = {
-        title: $('#storyTitle').val(),
-        slug: $('#storySlug').val(),
-        type: $('#storyType').val(),
-        categoryId: $('#storyCategoryId').val() ? parseInt($('#storyCategoryId').val()) : null,
-        duration: $('#storyDuration').val(),
-        durationSeconds: parseInt($('#storyDurationSeconds').val() || 0),
-        image: $('#storyImage').val(),
-        contentText: $('#storyContentText').val(),
-        audioUrl: $('#storyAudioUrl').val(),
-        isLocked: $('#storyIsLocked').val() === 'true',
-        isPublished: $('#storyIsPublished').val() === 'true',
-        orderIndex: parseInt($('#storyOrderIndex').val() || 0)
-      };
+      const fileInput = $('#storyImageFile')[0];
+      
+      if (!id && (!fileInput.files || fileInput.files.length === 0)) {
+        alert('Please select an image file to upload.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('title', $('#storyTitle').val());
+      formData.append('slug', $('#storySlug').val());
+      formData.append('type', $('#storyType').val());
+      formData.append('categoryId', $('#storyCategoryId').val() ? parseInt($('#storyCategoryId').val()) : '');
+      formData.append('duration', $('#storyDuration').val());
+      formData.append('durationSeconds', parseInt($('#storyDurationSeconds').val() || 0));
+      formData.append('contentText', $('#storyContentText').val());
+      formData.append('audioUrl', $('#storyAudioUrl').val());
+      formData.append('isLocked', $('#storyIsLocked').val() === 'true');
+      formData.append('isPublished', $('#storyIsPublished').val() === 'true');
+      formData.append('orderIndex', parseInt($('#storyOrderIndex').val() || 0));
+
+      if (fileInput.files && fileInput.files[0]) {
+        formData.append('image', fileInput.files[0]);
+      } else {
+        formData.append('image', $('#storyImage').val());
+      }
 
       const url = id ? `/api/stories/${id}` : '/api/stories';
       const type = id ? 'PUT' : 'POST';
@@ -1500,8 +1551,9 @@
       $.ajax({
         url,
         type,
-        contentType: 'application/json',
-        data: JSON.stringify(payload),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function() {
           $('#storyModal').modal('hide');
           loadStories();
@@ -1561,6 +1613,10 @@
       $('#audioItemModalLabel').text('Add Audio Item');
       $('#audioItemForm')[0].reset();
       $('#audioItemId').val('');
+      $('#audioImage').val('');
+      $('#audioImageFile').val('');
+      $('#audioImagePreviewContainer').hide();
+      $('#audioImagePreview').attr('src', '');
       $('#audioItemModal').modal('show');
     };
 
@@ -1579,26 +1635,47 @@
       $('#audioIsLocked').val(isLocked ? 'true' : 'false');
       $('#audioIsPublished').val(isPublished ? 'true' : 'false');
       $('#audioOrderIndex').val(orderIndex);
+      $('#audioImageFile').val('');
+      if (image) {
+        const displayImage = image.startsWith('https://cdn.biblecms.com')
+          ? '/uploads/' + image.split('/').pop()
+          : image;
+        $('#audioImagePreview').attr('src', displayImage);
+        $('#audioImagePreviewContainer').show();
+      } else {
+        $('#audioImagePreviewContainer').hide();
+      }
       $('#audioItemModal').modal('show');
     };
 
     $('#audioItemForm').submit(function(e) {
       e.preventDefault();
       const id = $('#audioItemId').val();
-      const payload = {
-        title: $('#audioTitle').val(),
-        slug: $('#audioSlug').val(),
-        category: $('#audioCategory').val(),
-        categoryId: $('#audioCategoryId').val() ? parseInt($('#audioCategoryId').val()) : null,
-        duration: $('#audioDuration').val(),
-        durationSeconds: parseInt($('#audioDurationSeconds').val() || 0),
-        image: $('#audioImage').val(),
-        audioUrl: $('#audioUrlField').val(),
-        badgeColor: $('#audioBadgeColor').val(),
-        isLocked: $('#audioIsLocked').val() === 'true',
-        isPublished: $('#audioIsPublished').val() === 'true',
-        orderIndex: parseInt($('#audioOrderIndex').val() || 0)
-      };
+      const fileInput = $('#audioImageFile')[0];
+      
+      if (!id && (!fileInput.files || fileInput.files.length === 0)) {
+        alert('Please select an image file to upload.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('title', $('#audioTitle').val());
+      formData.append('slug', $('#audioSlug').val());
+      formData.append('category', $('#audioCategory').val());
+      formData.append('categoryId', $('#audioCategoryId').val() ? parseInt($('#audioCategoryId').val()) : '');
+      formData.append('duration', $('#audioDuration').val());
+      formData.append('durationSeconds', parseInt($('#audioDurationSeconds').val() || 0));
+      formData.append('audioUrl', $('#audioUrlField').val());
+      formData.append('badgeColor', $('#audioBadgeColor').val());
+      formData.append('isLocked', $('#audioIsLocked').val() === 'true');
+      formData.append('isPublished', $('#audioIsPublished').val() === 'true');
+      formData.append('orderIndex', parseInt($('#audioOrderIndex').val() || 0));
+
+      if (fileInput.files && fileInput.files[0]) {
+        formData.append('image', fileInput.files[0]);
+      } else {
+        formData.append('image', $('#audioImage').val());
+      }
 
       const url = id ? `/api/audio-items/${id}` : '/api/audio-items';
       const type = id ? 'PUT' : 'POST';
@@ -1606,8 +1683,9 @@
       $.ajax({
         url,
         type,
-        contentType: 'application/json',
-        data: JSON.stringify(payload),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function() {
           $('#audioItemModal').modal('hide');
           loadAudioItems();
@@ -1665,6 +1743,10 @@
       $('#productModalLabel').text('Add Product');
       $('#productForm')[0].reset();
       $('#productId').val('');
+      $('#prodImage').val('');
+      $('#prodImageFile').val('');
+      $('#prodImagePreviewContainer').hide();
+      $('#prodImagePreview').attr('src', '');
       $('#productModal').modal('show');
     };
 
@@ -1680,23 +1762,44 @@
       $('#prodDurationSeconds').val(durationSeconds);
       $('#prodOrderIndex').val(orderIndex);
       $('#prodIsPublished').val(isPublished ? 'true' : 'false');
+      $('#prodImageFile').val('');
+      if (image) {
+        const displayImage = image.startsWith('https://cdn.biblecms.com')
+          ? '/uploads/' + image.split('/').pop()
+          : image;
+        $('#prodImagePreview').attr('src', displayImage);
+        $('#prodImagePreviewContainer').show();
+      } else {
+        $('#prodImagePreviewContainer').hide();
+      }
       $('#productModal').modal('show');
     };
 
     $('#productForm').submit(function(e) {
       e.preventDefault();
       const id = $('#productId').val();
-      const payload = {
-        title: $('#prodTitle').val(),
-        description: $('#prodDescription').val(),
-        price: parseFloat($('#prodPrice').val() || 0),
-        priceString: $('#prodPriceString').val(),
-        image: $('#prodImage').val(),
-        duration: $('#prodDuration').val(),
-        durationSeconds: parseInt($('#prodDurationSeconds').val() || 0),
-        orderIndex: parseInt($('#prodOrderIndex').val() || 0),
-        isPublished: $('#prodIsPublished').val() === 'true'
-      };
+      const fileInput = $('#prodImageFile')[0];
+      
+      if (!id && (!fileInput.files || fileInput.files.length === 0)) {
+        alert('Please select an image file to upload.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('title', $('#prodTitle').val());
+      formData.append('description', $('#prodDescription').val());
+      formData.append('price', parseFloat($('#prodPrice').val() || 0));
+      formData.append('priceString', $('#prodPriceString').val());
+      formData.append('duration', $('#prodDuration').val());
+      formData.append('durationSeconds', parseInt($('#prodDurationSeconds').val() || 0));
+      formData.append('orderIndex', parseInt($('#prodOrderIndex').val() || 0));
+      formData.append('isPublished', $('#prodIsPublished').val() === 'true');
+
+      if (fileInput.files && fileInput.files[0]) {
+        formData.append('image', fileInput.files[0]);
+      } else {
+        formData.append('image', $('#prodImage').val());
+      }
 
       const url = id ? `/api/products/${id}` : '/api/products';
       const type = id ? 'PUT' : 'POST';
@@ -1704,8 +1807,9 @@
       $.ajax({
         url,
         type,
-        contentType: 'application/json',
-        data: JSON.stringify(payload),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function() {
           $('#productModal').modal('hide');
           loadProducts();
@@ -2105,8 +2209,13 @@
             <input type="number" class="form-control" id="catCount" value="0">
           </div>
           <div class="form-group">
-            <label for="catImage" class="font-weight-bold">Image URL *</label>
-            <input type="text" class="form-control" id="catImage" placeholder="/uploads/... or absolute URL" required>
+            <label for="catImageFile" class="font-weight-bold">Image File</label>
+            <input type="file" class="form-control-file" id="catImageFile" accept="image/*">
+            <input type="hidden" id="catImage">
+            <div id="catImagePreviewContainer" class="mt-2" style="display:none;">
+              <small class="text-muted d-block mb-1">Current Image:</small>
+              <img id="catImagePreview" src="" style="max-height: 80px; border-radius: 4px;" class="border">
+            </div>
           </div>
           <div class="form-group">
             <label for="catOrderIndex" class="font-weight-bold">Order Index</label>
@@ -2171,8 +2280,13 @@
                 <input type="number" class="form-control" id="storyDurationSeconds" value="0">
               </div>
               <div class="form-group">
-                <label for="storyImage" class="font-weight-bold">Image URL *</label>
-                <input type="text" class="form-control" id="storyImage" placeholder="/uploads/..." required>
+                <label for="storyImageFile" class="font-weight-bold">Image File</label>
+                <input type="file" class="form-control-file" id="storyImageFile" accept="image/*">
+                <input type="hidden" id="storyImage">
+                <div id="storyImagePreviewContainer" class="mt-2" style="display:none;">
+                  <small class="text-muted d-block mb-1">Current Image:</small>
+                  <img id="storyImagePreview" src="" style="max-height: 80px; border-radius: 4px;" class="border">
+                </div>
               </div>
               <div class="form-group">
                 <label for="storyAudioUrl" class="font-weight-bold">Audio URL</label>
@@ -2262,8 +2376,13 @@
                 <input type="number" class="form-control" id="audioDurationSeconds" value="0">
               </div>
               <div class="form-group">
-                <label for="audioImage" class="font-weight-bold">Image URL *</label>
-                <input type="text" class="form-control" id="audioImage" placeholder="/uploads/..." required>
+                <label for="audioImageFile" class="font-weight-bold">Image File</label>
+                <input type="file" class="form-control-file" id="audioImageFile" accept="image/*">
+                <input type="hidden" id="audioImage">
+                <div id="audioImagePreviewContainer" class="mt-2" style="display:none;">
+                  <small class="text-muted d-block mb-1">Current Image:</small>
+                  <img id="audioImagePreview" src="" style="max-height: 80px; border-radius: 4px;" class="border">
+                </div>
               </div>
               <div class="form-group">
                 <label for="audioUrlField" class="font-weight-bold">Audio URL *</label>
@@ -2341,8 +2460,13 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="prodImage" class="font-weight-bold">Image URL *</label>
-                <input type="text" class="form-control" id="prodImage" placeholder="/uploads/..." required>
+                <label for="prodImageFile" class="font-weight-bold">Image File</label>
+                <input type="file" class="form-control-file" id="prodImageFile" accept="image/*">
+                <input type="hidden" id="prodImage">
+                <div id="prodImagePreviewContainer" class="mt-2" style="display:none;">
+                  <small class="text-muted d-block mb-1">Current Image:</small>
+                  <img id="prodImagePreview" src="" style="max-height: 80px; border-radius: 4px;" class="border">
+                </div>
               </div>
               <div class="form-group">
                 <label for="prodDuration" class="font-weight-bold">Duration String (e.g. 1 Month)</label>

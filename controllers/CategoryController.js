@@ -13,7 +13,10 @@ class CategoryController {
 
   async create(req, res) {
     try {
-      const { title, subtitle, count, image, type, orderIndex, isPublished } = req.body;
+      let { title, subtitle, count, image, type, orderIndex, isPublished } = req.body;
+      if (req.file) {
+        image = `https://cdn.biblecms.com/images/${req.file.filename}`;
+      }
       if (!title || !image || !type) {
         return res.status(400).json({ message: 'Lütfen tüm zorunlu alanları doldurun (title, image, type).' });
       }
@@ -40,7 +43,10 @@ class CategoryController {
 
   async update(req, res) {
     try {
-      const { title, subtitle, count, image, type, orderIndex, isPublished } = req.body;
+      let { title, subtitle, count, image, type, orderIndex, isPublished } = req.body;
+      if (req.file) {
+        image = `https://cdn.biblecms.com/images/${req.file.filename}`;
+      }
       const updated = await categoryModel.update(req.params.id, {
         title,
         subtitle,

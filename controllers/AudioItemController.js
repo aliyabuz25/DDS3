@@ -18,7 +18,10 @@ class AudioItemController {
 
   async create(req, res) {
     try {
-      const { title, slug, category, categoryId, duration, durationSeconds, image, audioUrl, badgeColor, isLocked, isPublished, orderIndex } = req.body;
+      let { title, slug, category, categoryId, duration, durationSeconds, image, audioUrl, badgeColor, isLocked, isPublished, orderIndex } = req.body;
+      if (req.file) {
+        image = `https://cdn.biblecms.com/images/${req.file.filename}`;
+      }
       if (!title || !slug || !category || !image || !audioUrl) {
         return res.status(400).json({ message: 'Lütfen tüm zorunlu alanları doldurun (title, slug, category, image, audioUrl).' });
       }
@@ -50,7 +53,10 @@ class AudioItemController {
 
   async update(req, res) {
     try {
-      const { title, slug, category, categoryId, duration, durationSeconds, image, audioUrl, badgeColor, isLocked, isPublished, orderIndex } = req.body;
+      let { title, slug, category, categoryId, duration, durationSeconds, image, audioUrl, badgeColor, isLocked, isPublished, orderIndex } = req.body;
+      if (req.file) {
+        image = `https://cdn.biblecms.com/images/${req.file.filename}`;
+      }
       const updated = await audioItemModel.update(req.params.id, {
         title,
         slug,

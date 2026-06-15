@@ -16,7 +16,10 @@ class ProductController {
 
   async create(req, res) {
     try {
-      const { title, description, price, priceString, image, duration, durationSeconds, orderIndex, isPublished, category, catColor, stories, ages, pages, externalUrl, isAvailable } = req.body;
+      let { title, description, price, priceString, image, duration, durationSeconds, orderIndex, isPublished, category, catColor, stories, ages, pages, externalUrl, isAvailable } = req.body;
+      if (req.file) {
+        image = `https://cdn.biblecms.com/images/${req.file.filename}`;
+      }
       if (!title || price === undefined || !image) {
         return res.status(400).json({ message: 'Lütfen tüm zorunlu alanları doldurun (title, price, image).' });
       }
@@ -47,7 +50,10 @@ class ProductController {
 
   async update(req, res) {
     try {
-      const { title, description, price, priceString, image, duration, durationSeconds, orderIndex, isPublished, category, catColor, stories, ages, pages, externalUrl, isAvailable } = req.body;
+      let { title, description, price, priceString, image, duration, durationSeconds, orderIndex, isPublished, category, catColor, stories, ages, pages, externalUrl, isAvailable } = req.body;
+      if (req.file) {
+        image = `https://cdn.biblecms.com/images/${req.file.filename}`;
+      }
       const updated = await productModel.update(req.params.id, {
         title,
         category,

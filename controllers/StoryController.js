@@ -18,7 +18,10 @@ class StoryController {
 
   async create(req, res) {
     try {
-      const { title, slug, type, categoryId, duration, durationSeconds, image, contentText, audioUrl, isLocked, isPublished, orderIndex } = req.body;
+      let { title, slug, type, categoryId, duration, durationSeconds, image, contentText, audioUrl, isLocked, isPublished, orderIndex } = req.body;
+      if (req.file) {
+        image = `https://cdn.biblecms.com/images/${req.file.filename}`;
+      }
       if (!title || !slug || !image) {
         return res.status(400).json({ message: 'Lütfen tüm zorunlu alanları doldurun (title, slug, image).' });
       }
@@ -50,7 +53,10 @@ class StoryController {
 
   async update(req, res) {
     try {
-      const { title, slug, type, categoryId, duration, durationSeconds, image, contentText, audioUrl, isLocked, isPublished, orderIndex } = req.body;
+      let { title, slug, type, categoryId, duration, durationSeconds, image, contentText, audioUrl, isLocked, isPublished, orderIndex } = req.body;
+      if (req.file) {
+        image = `https://cdn.biblecms.com/images/${req.file.filename}`;
+      }
       const updated = await storyModel.update(req.params.id, {
         title,
         slug,
