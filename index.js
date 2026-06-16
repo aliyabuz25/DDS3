@@ -28,6 +28,9 @@ const notificationModel = require('./models/Notification');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Trust proxy for express-rate-limit behind reverse proxy (like Nginx)
+app.set('trust proxy', 1);
+
 // Set EJS as templating engine and set views directory explicitly
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
