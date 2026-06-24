@@ -2110,6 +2110,10 @@
     return `${prefix}-${Date.now().toString(36)}-${randomPart}`;
   }
 
+  function generateRandomCategoryId() {
+    return Math.floor(100000 + Math.random() * 900000);
+  }
+
   // Section switcher helper
   function showSection(sectionId, navLinkId) {
     // Hide all sections
@@ -3257,6 +3261,7 @@
       $('#videoForm')[0].reset();
       $('#videoId').val('');
       $('#videoSlug').val(generateRandomSlug('video'));
+      $('#videoCategoryId').val(generateRandomCategoryId());
       $('#videoVerticalBannerUrl').val('');
       $('#videoVerticalBannerFile').val('');
       $('#videoFile').val('');
@@ -3287,7 +3292,7 @@
       $('#videoTitle').val(title);
       $('#videoSlug').val(slug || generateRandomSlug('video'));
       $('#videoCategory').val(category);
-      $('#videoCategoryId').val(categoryId);
+      $('#videoCategoryId').val(categoryId || generateRandomCategoryId());
       $('#videoVerticalBannerUrl').val(verticalBanner);
       $('#videoUrl').val(videoUrl);
       $('#videoSrtFile').val('');
@@ -3470,7 +3475,7 @@
           title: $('#videoTitle').val(),
           slug: $('#videoSlug').val() || generateRandomSlug('video'),
           category: $('#videoCategory').val(),
-          categoryId: $('#videoCategoryId').val() ? parseInt($('#videoCategoryId').val()) : '',
+          categoryId: $('#videoCategoryId').val() ? parseInt($('#videoCategoryId').val()) : generateRandomCategoryId(),
           isLocked: $('#videoIsLocked').val() === 'true',
           isPublished: $('#videoIsPublished').val() === 'true',
           orderIndex: parseInt($('#videoOrderIndex').val() || 0),
@@ -4633,10 +4638,7 @@
             <label for="videoCategory" class="font-weight-bold">Category Name *</label>
             <input type="text" class="form-control" id="videoCategory" required placeholder="e.g. Kids Videos">
           </div>
-          <div class="form-group">
-            <label for="videoCategoryId" class="font-weight-bold">Category ID</label>
-            <input type="number" class="form-control" id="videoCategoryId" placeholder="e.g. 1">
-          </div>
+          <input type="hidden" id="videoCategoryId">
           <div class="form-group">
             <label for="videoVerticalBannerFile" class="font-weight-bold">Vertical Banner <span class="text-muted">(preferred)</span></label>
             <input type="file" class="form-control-file" id="videoVerticalBannerFile" accept="image/*">

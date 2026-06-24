@@ -235,11 +235,14 @@ class VideoController {
         return res.status(400).json({ message: 'Vertical banner URL is missing. Upload a banner file or paste a banner URL.' });
       }
 
-      // If categoryId is present, fetch the category to get the exact name
+      // If categoryId exists in the categories table, use its exact name.
+      // Random hidden IDs from the dashboard should not break FK validation.
       if (categoryId) {
         const cat = await categoryModel.findById(categoryId);
         if (cat) {
           category = cat.title;
+        } else {
+          categoryId = null;
         }
       }
 
@@ -293,6 +296,8 @@ class VideoController {
         const cat = await categoryModel.findById(categoryId);
         if (cat) {
           category = cat.title;
+        } else {
+          categoryId = null;
         }
       }
 
