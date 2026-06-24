@@ -1,6 +1,6 @@
 const db = require('../database');
 
-async function ensureSubtitleUrlColumn() {
+async function ensureVideoSchemaColumns() {
   try {
     await db.run("ALTER TABLE videos ADD COLUMN subtitleUrl TEXT DEFAULT ''");
   } catch (err) {
@@ -8,10 +8,25 @@ async function ensureSubtitleUrlColumn() {
       throw err;
     }
   }
+
+  try {
+    await db.run("ALTER TABLE videos ADD COLUMN videoSizeBytes INTEGER DEFAULT 0");
+  } catch (err) {
+    if (!err || !String(err.message || '').includes('duplicate column name')) {
+      throw err;
+    }
+  }
 }
 
-function isMissingSubtitleColumnError(err) {
-  return err && err.code === 'SQLITE_ERROR' && String(err.message || '').includes('no column named subtitleUrl');
+function isMissingVideoSchemaColumnError(err) {
+  if (!err || err.code !== 'SQLITE_ERROR') return false;
+  const message = String(err.message || '');
+  return message.includes('no column named subtitleUrl') || message.includes('no column named videoSizeBytes');
+}
+
+function normalizeFileSize(value) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? Math.round(parsed) : 0;
 }
 
 class Video {
@@ -58,11 +73,12 @@ class Video {
     }
   }
 
-  async create({ title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, isLocked, isPublished, orderIndex }) {
+  async create({ title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, videoSizeBytes, isLocked, isPublished, orderIndex }) {
     const insertVideo = async () => {
       const createdAt = new Date().toISOString();
+      const normalizedVideoSizeBytes = normalizeFileSize(videoSizeBytes);
       const result = await db.run(
-        "INSERT INTO videos (title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, isLocked, isPublished, orderIndex, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO videos (title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, videoSizeBytes, isLocked, isPublished, orderIndex, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
           title,
           slug,
@@ -71,6 +87,7 @@ class Video {
           videoUrl,
           verticalBannerUrl || '',
           subtitleUrl,
+          normalizedVideoSizeBytes,
           isLocked ? 1 : 0,
           isPublished ? 1 : 0,
           orderIndex ? parseInt(orderIndex) : 0,
@@ -86,6 +103,7 @@ class Video {
         videoUrl,
         verticalBannerUrl,
         subtitleUrl,
+        videoSizeBytes: normalizedVideoSizeBytes,
         isLocked: isLocked ? 1 : 0,
         isPublished: isPublished ? 1 : 0,
         orderIndex: orderIndex ? parseInt(orderIndex) : 0,
@@ -96,8 +114,8 @@ class Video {
     try {
       return await insertVideo();
     } catch (err) {
-      if (isMissingSubtitleColumnError(err)) {
-        await ensureSubtitleUrlColumn();
+      if (isMissingVideoSchemaColumnError(err)) {
+        await ensureVideoSchemaColumns();
         return insertVideo();
       }
       console.error(err);
@@ -105,7 +123,7 @@ class Video {
     }
   }
 
-  async update(id, { title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, isLocked, isPublished, orderIndex }) {
+  async update(id, { title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, videoSizeBytes, isLocked, isPublished, orderIndex }) {
     try {
       const existing = await this.findById(id);
       if (!existing) return null;
@@ -117,13 +135,14 @@ class Video {
       const updatedVideoUrl = videoUrl !== undefined ? videoUrl : existing.videoUrl;
       const updatedVerticalBannerUrl = verticalBannerUrl !== undefined ? verticalBannerUrl : existing.verticalBannerUrl;
       const updatedSubtitleUrl = subtitleUrl !== undefined ? subtitleUrl : existing.subtitleUrl;
+      const updatedVideoSizeBytes = videoSizeBytes !== undefined ? normalizeFileSize(videoSizeBytes) : normalizeFileSize(existing.videoSizeBytes);
       const updatedIsLocked = isLocked !== undefined ? (isLocked ? 1 : 0) : existing.isLocked;
       const updatedIsPublished = isPublished !== undefined ? (isPublished ? 1 : 0) : existing.isPublished;
       const updatedOrderIndex = orderIndex !== undefined ? parseInt(orderIndex) : existing.orderIndex;
 
       const updateVideo = async () => {
         await db.run(
-          "UPDATE videos SET title = ?, slug = ?, categoryId = ?, category = ?, videoUrl = ?, verticalBannerUrl = ?, subtitleUrl = ?, isLocked = ?, isPublished = ?, orderIndex = ? WHERE id = ?",
+          "UPDATE videos SET title = ?, slug = ?, categoryId = ?, category = ?, videoUrl = ?, verticalBannerUrl = ?, subtitleUrl = ?, videoSizeBytes = ?, isLocked = ?, isPublished = ?, orderIndex = ? WHERE id = ?",
           [
             updatedTitle,
             updatedSlug,
@@ -132,6 +151,7 @@ class Video {
             updatedVideoUrl,
             updatedVerticalBannerUrl,
             updatedSubtitleUrl,
+            updatedVideoSizeBytes,
             updatedIsLocked,
             updatedIsPublished,
             updatedOrderIndex,
@@ -143,8 +163,8 @@ class Video {
       try {
         await updateVideo();
       } catch (err) {
-        if (!isMissingSubtitleColumnError(err)) throw err;
-        await ensureSubtitleUrlColumn();
+        if (!isMissingVideoSchemaColumnError(err)) throw err;
+        await ensureVideoSchemaColumns();
         await updateVideo();
       }
 
@@ -157,6 +177,7 @@ class Video {
         videoUrl: updatedVideoUrl,
         verticalBannerUrl: updatedVerticalBannerUrl,
         subtitleUrl: updatedSubtitleUrl,
+        videoSizeBytes: updatedVideoSizeBytes,
         isLocked: updatedIsLocked,
         isPublished: updatedIsPublished,
         orderIndex: updatedOrderIndex

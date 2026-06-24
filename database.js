@@ -278,6 +278,7 @@ async function initDb() {
             videoUrl TEXT NOT NULL,
             verticalBannerUrl TEXT NOT NULL,
             subtitleUrl TEXT DEFAULT '',
+            videoSizeBytes INTEGER DEFAULT 0,
             isLocked INTEGER DEFAULT 0,
             isPublished INTEGER DEFAULT 0,
             orderIndex INTEGER DEFAULT 0,
@@ -291,6 +292,10 @@ async function initDb() {
             const hasSubtitleUrl = rows.some((row) => row.name === 'subtitleUrl');
             if (!hasSubtitleUrl) {
               db.run("ALTER TABLE videos ADD COLUMN subtitleUrl TEXT DEFAULT ''", [], () => {});
+            }
+            const hasVideoSizeBytes = rows.some((row) => row.name === 'videoSizeBytes');
+            if (!hasVideoSizeBytes) {
+              db.run("ALTER TABLE videos ADD COLUMN videoSizeBytes INTEGER DEFAULT 0", [], () => {});
             }
           }
         });

@@ -105,6 +105,7 @@ async function getS3VideoFallbackRows() {
         verticalBannerUrl: banner ? banner.url : '',
         videoUrl: video.url,
         subtitleUrl: subtitle ? subtitle.url : '',
+        videoSizeBytes: video.size || 0,
         isLocked: 0,
         isPublished: 1,
         orderIndex: index + 1,
@@ -193,13 +194,14 @@ class VideoController {
 
   async create(req, res) {
     try {
-      let { title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, isLocked, isPublished, orderIndex } = req.body;
+      let { title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, videoSizeBytes, isLocked, isPublished, orderIndex } = req.body;
       videoUrl = videoUrl || req.body.video || '';
       verticalBannerUrl = verticalBannerUrl || req.body.verticalBanner || '';
 
       if (req.files) {
         if (req.files['video'] && req.files['video'][0]) {
           videoUrl = await maybeUploadToS3(req.files['video'][0], 'videos');
+          videoSizeBytes = req.files['video'][0].size;
         }
         if (req.files['verticalBanner'] && req.files['verticalBanner'][0]) {
           verticalBannerUrl = await maybeUploadToS3(req.files['verticalBanner'][0], 'video-banners');
@@ -249,6 +251,7 @@ class VideoController {
         videoUrl,
         verticalBannerUrl,
         subtitleUrl: subtitleUrl || '',
+        videoSizeBytes,
         isLocked: isLocked === 'true' || isLocked === '1' || isLocked === true,
         isPublished: isPublished === 'true' || isPublished === '1' || isPublished === true,
         orderIndex: orderIndex ? parseInt(orderIndex) : 0
@@ -269,13 +272,14 @@ class VideoController {
 
   async update(req, res) {
     try {
-      let { title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, isLocked, isPublished, orderIndex } = req.body;
+      let { title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, videoSizeBytes, isLocked, isPublished, orderIndex } = req.body;
       videoUrl = videoUrl || req.body.video;
       verticalBannerUrl = verticalBannerUrl || req.body.verticalBanner;
 
       if (req.files) {
         if (req.files['video'] && req.files['video'][0]) {
           videoUrl = await maybeUploadToS3(req.files['video'][0], 'videos');
+          videoSizeBytes = req.files['video'][0].size;
         }
         if (req.files['verticalBanner'] && req.files['verticalBanner'][0]) {
           verticalBannerUrl = await maybeUploadToS3(req.files['verticalBanner'][0], 'video-banners');
@@ -300,6 +304,7 @@ class VideoController {
         videoUrl,
         verticalBannerUrl,
         subtitleUrl,
+        videoSizeBytes,
         isLocked: isLocked !== undefined ? (isLocked === 'true' || isLocked === '1' || isLocked === true) : undefined,
         isPublished: isPublished !== undefined ? (isPublished === 'true' || isPublished === '1' || isPublished === true) : undefined,
         orderIndex: orderIndex !== undefined ? parseInt(orderIndex) : undefined

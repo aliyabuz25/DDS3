@@ -1554,6 +1554,7 @@
                     <th>Category ID</th>
                     <th>Vertical Banner (3:4)</th>
                     <th>Video File Path / URL</th>
+                    <th>Size</th>
                     <th>SRT / Subtitle</th>
                     <th>Locked</th>
                     <th>Published</th>
@@ -3206,6 +3207,7 @@
                   <br><small class="text-muted">${v.verticalBannerUrl || ''}</small>
                 </td>
                 <td><code>${v.videoUrl || ''}</code></td>
+                <td>${formatVideoSize(v.videoSizeBytes)}</td>
                 <td>
                   ${v.subtitleUrl ? `<span class="badge badge-info">SRT</span><br><small class="text-muted">${v.subtitleUrl}</small>` : '<span class="text-muted">No subtitle</span>'}
                 </td>
@@ -3225,12 +3227,25 @@
           console.error('Video list could not be loaded', err.responseText || err.statusText || err);
           $('#videosTableBody').html(`
             <tr>
-              <td colspan="12" class="text-center text-danger">Videos could not be loaded. Please refresh and try again.</td>
+              <td colspan="13" class="text-center text-danger">Videos could not be loaded. Please refresh and try again.</td>
             </tr>
           `);
         }
       });
     };
+
+    function formatVideoSize(bytes) {
+      const value = Number(bytes || 0);
+      if (!Number.isFinite(value) || value <= 0) {
+        return '<span class="text-muted">-</span>';
+      }
+      const gb = value / (1024 * 1024 * 1024);
+      const mb = value / (1024 * 1024);
+      if (gb >= 1) {
+        return `<strong>${gb.toFixed(2)} GB</strong>`;
+      }
+      return `<strong>${mb.toFixed(1)} MB</strong>`;
+    }
 
     window.openAddVideoModal = function() {
       if (isVideoUploadInProgress) {
@@ -3465,6 +3480,10 @@
           videoUrl: videoUrl,
           subtitleUrl: subtitleUrl
         };
+
+        if (videoFileInput.files && videoFileInput.files[0]) {
+          payload.videoSizeBytes = videoFileInput.files[0].size;
+        }
 
         return submitMetadata(payload);
       };
