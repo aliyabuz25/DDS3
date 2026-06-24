@@ -3156,6 +3156,25 @@
     };
 
     // Videos Section Functions
+    let isVideoUploadInProgress = false;
+
+    function setVideoUploadLock(isLocked) {
+      isVideoUploadInProgress = isLocked;
+      $('#videoModal .close-btn, #videoModal .btn-secondary').prop('disabled', isLocked);
+      $('#videoModal .header-save-btn, #videoModal button[type="submit"]').prop('disabled', isLocked);
+    }
+
+    function warnVideoUploadInProgress() {
+      $('#videoUploadProgressWrap').show();
+      $('#videoUploadProgressText').text('Upload in progress. Please wait...');
+    }
+
+    window.addEventListener('beforeunload', function(event) {
+      if (!isVideoUploadInProgress) return;
+      event.preventDefault();
+      event.returnValue = '';
+    });
+
     window.loadVideos = function() {
       if ($.fn.DataTable.isDataTable('#videosTable')) {
         $('#videosTable').DataTable().destroy();
@@ -3209,6 +3228,11 @@
     };
 
     window.openAddVideoModal = function() {
+      if (isVideoUploadInProgress) {
+        warnVideoUploadInProgress();
+        $('#videoModal').modal('show');
+        return;
+      }
       $('#videoModalLabel').text('Add Video');
       $('#videoForm')[0].reset();
       $('#videoId').val('');
@@ -3233,6 +3257,11 @@
     }
 
     window.openEditVideoModal = function(id, title, slug, category, categoryId, verticalBanner, videoUrl, subtitleUrl, isLocked, isPublished, orderIndex) {
+      if (isVideoUploadInProgress) {
+        warnVideoUploadInProgress();
+        $('#videoModal').modal('show');
+        return;
+      }
       $('#videoModalLabel').text('Edit Video');
       $('#videoId').val(id);
       $('#videoTitle').val(title);
@@ -3324,6 +3353,7 @@
       progressWrap.show();
       progressBar.css('width', '0%');
       progressText.text('0%');
+      setVideoUploadLock(true);
 
       const selectedFiles = [];
       if (bannerFileInput.files && bannerFileInput.files[0]) {
@@ -3344,10 +3374,12 @@
           success: function() {
             progressBar.css('width', '100%');
             progressText.text('Upload complete 100%');
+            setVideoUploadLock(false);
             $('#videoModal').modal('hide');
             loadVideos();
           },
           error: function(err) {
+            setVideoUploadLock(false);
             progressWrap.hide();
             const message = err.responseJSON && err.responseJSON.message
               ? err.responseJSON.message
@@ -3429,6 +3461,7 @@
       };
 
       sendWithPresignedUploads().catch((error) => {
+        setVideoUploadLock(false);
         progressWrap.hide();
         alert(String(error.message || error).replace(/<[^>]*>/g, ''));
       });
@@ -4034,6 +4067,10 @@
     };
 
     window.closeOffcanvas = function(id) {
+      if (id === 'videoModal' && isVideoUploadInProgress) {
+        warnVideoUploadInProgress();
+        return;
+      }
       $(`#${id}`).removeClass('show');
       if ($('.offcanvas-sheet.show').length === 0) {
         $('#offcanvas-backdrop').removeClass('show');
