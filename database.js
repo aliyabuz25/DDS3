@@ -1,8 +1,11 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const fs = require('fs');
 const bcrypt = require('bcryptjs');
 
-const dbPath = path.join(__dirname, 'database.sqlite');
+const configuredDbPath = process.env.SQLITE_DB_PATH || process.env.DATABASE_PATH;
+const dbPath = configuredDbPath ? path.resolve(configuredDbPath) : path.join(__dirname, 'database.sqlite');
+fs.mkdirSync(path.dirname(dbPath), { recursive: true });
 const db = new sqlite3.Database(dbPath);
 
 // Helper to run query with Promise
@@ -589,14 +592,14 @@ async function initDb() {
               async (err) => {
                 if (err) return reject(err);
                 await ensureSpecificUser();
-                await ensureVideos();
+                // Do not seed sample videos. Real video content is managed through S3/admin uploads.
                 console.log('--- SQLITE DATABASE SEED COMPLETE ---');
                 resolve();
               }
             );
           } else {
             await ensureSpecificUser();
-            await ensureVideos();
+            // Do not seed sample videos on existing databases either.
             resolve();
           }
         });

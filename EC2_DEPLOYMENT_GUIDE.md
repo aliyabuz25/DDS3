@@ -102,6 +102,18 @@ JWT_SECRET=production_jwt_gizli_anahtari_buraya_yazilacak
 AWS_REGION=us-east-1
 AWS_S3_BUCKET=biblecms-media-2026-app
 AWS_S3_PREFIX=kidsbible-content
+
+# Keep SQLite outside the app folder so git clone/reinstall does not delete content.
+SQLITE_DB_PATH=/var/lib/bibledashboard/database.sqlite
+```
+
+Mevcut DB varsa silmeden kalıcı klasöre taşıyın:
+```bash
+sudo mkdir -p /var/lib/bibledashboard
+if [ -f database.sqlite ] && [ ! -f /var/lib/bibledashboard/database.sqlite ]; then
+  sudo cp database.sqlite /var/lib/bibledashboard/database.sqlite
+fi
+sudo chown -R ubuntu:ubuntu /var/lib/bibledashboard
 ```
 
 ### Adım 5: PM2 (Arka Planda Çalıştırma)

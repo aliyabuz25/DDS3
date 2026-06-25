@@ -73,6 +73,16 @@ class Video {
     }
   }
 
+  async getNextOrderIndex() {
+    try {
+      const row = await db.get("SELECT COALESCE(MAX(orderIndex), 0) + 1 AS nextOrderIndex FROM videos");
+      return row && row.nextOrderIndex ? parseInt(row.nextOrderIndex) : 1;
+    } catch (err) {
+      console.error(err);
+      return 1;
+    }
+  }
+
   async create({ title, slug, categoryId, category, videoUrl, verticalBannerUrl, subtitleUrl, videoSizeBytes, isLocked, isPublished, orderIndex }) {
     const insertVideo = async () => {
       const createdAt = new Date().toISOString();

@@ -42,6 +42,10 @@ function makeVideoUrlKeyPrefix(subdir) {
   return `${getRootPrefix()}/${prefixMap[subdir] || subdir}`;
 }
 
+function hasManualOrderIndex(value) {
+  return value !== undefined && value !== null && value !== '' && value !== 'auto';
+}
+
 function getObjectTimestamp(object) {
   const fileName = object.key.split('/').pop() || '';
   const match = fileName.match(/^(\d{10,})-/);
@@ -246,6 +250,10 @@ class VideoController {
         }
       }
 
+      const finalOrderIndex = hasManualOrderIndex(orderIndex)
+        ? parseInt(orderIndex)
+        : await videoModel.getNextOrderIndex();
+
       const newVideo = await videoModel.create({
         title,
         slug,
@@ -257,7 +265,7 @@ class VideoController {
         videoSizeBytes,
         isLocked: isLocked === 'true' || isLocked === '1' || isLocked === true,
         isPublished: isPublished === 'true' || isPublished === '1' || isPublished === true,
-        orderIndex: orderIndex ? parseInt(orderIndex) : 0
+        orderIndex: finalOrderIndex
       });
 
       res.status(201).json({

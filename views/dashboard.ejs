@@ -3268,6 +3268,8 @@
       $('#videoSrtFile').val('');
       $('#videoUrl').val('');
       $('#videoSrtUrl').val('');
+      $('#videoOrderIndex').val('');
+      $('#videoOrderAdvanced').prop('open', false);
       $('#videoVerticalBannerPreviewContainer').hide();
       $('#videoVerticalBannerPreview').attr('src', '');
       $('#videoModal').modal('show');
@@ -3300,6 +3302,7 @@
       $('#videoIsLocked').val(isLocked ? 'true' : 'false');
       $('#videoIsPublished').val(isPublished ? 'true' : 'false');
       $('#videoOrderIndex').val(orderIndex);
+      $('#videoOrderAdvanced').prop('open', false);
       $('#videoVerticalBannerFile').val('');
       $('#videoFile').val('');
       if (verticalBanner) {
@@ -3478,13 +3481,16 @@
           categoryId: $('#videoCategoryId').val() ? parseInt($('#videoCategoryId').val()) : generateRandomCategoryId(),
           isLocked: $('#videoIsLocked').val() === 'true',
           isPublished: $('#videoIsPublished').val() === 'true',
-          orderIndex: parseInt($('#videoOrderIndex').val() || 0),
           verticalBanner: verticalBannerUrl,
           verticalBannerUrl: verticalBannerUrl,
           video: videoUrl,
           videoUrl: videoUrl,
           subtitleUrl: subtitleUrl
         };
+
+        if ($('#videoOrderIndex').val() !== '') {
+          payload.orderIndex = parseInt($('#videoOrderIndex').val());
+        }
 
         if (videoFileInput.files && videoFileInput.files[0]) {
           payload.videoSizeBytes = videoFileInput.files[0].size;
@@ -4671,10 +4677,14 @@
                 <option value="true">Locked</option>
               </select>
             </div>
-            <div class="form-group mb-0">
-              <label for="videoOrderIndex" class="font-weight-bold">Order Index</label>
-              <input type="number" class="form-control" id="videoOrderIndex" value="0">
-            </div>
+            <details id="videoOrderAdvanced" class="mt-2">
+              <summary class="font-weight-bold text-secondary" style="cursor:pointer;">Advanced: change order manually</summary>
+              <div class="form-group mb-0 mt-2">
+                <label for="videoOrderIndex" class="font-weight-bold">Order Index</label>
+                <input type="number" class="form-control" id="videoOrderIndex" placeholder="Auto">
+                <small class="text-muted">Leave blank to place this video after the latest item automatically.</small>
+              </div>
+            </details>
           </div>
         </div>
       </div>

@@ -40,6 +40,24 @@ AWS Console > S3 > `biblecms-media-2026-app` > `Permissions` > `Bucket policy` a
 }
 ```
 
+### 3. Browser direct upload için CORS
+Admin panel presigned URL ile doğrudan S3'e `PUT` yaptığı için bucket CORS zorunludur.
+
+AWS CLI ile:
+```bash
+aws s3api put-bucket-cors \
+  --bucket biblecms-media-2026-app \
+  --region us-east-1 \
+  --cors-configuration file://aws_bucket_cors.json
+```
+
+Kontrol:
+```bash
+aws s3api get-bucket-cors \
+  --bucket biblecms-media-2026-app \
+  --region us-east-1
+```
+
 ---
 
 ## Adım 3: IAM Kimlik Bilgilerini Alma ve İzinleri Tanımlama
