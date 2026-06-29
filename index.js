@@ -28,7 +28,7 @@ const paymentModel = require('./models/Payment');
 const notificationModel = require('./models/Notification');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7766;
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || '';
 const STRIPE_CHECKOUT_SUCCESS_URL = process.env.STRIPE_CHECKOUT_SUCCESS_URL || 'https://app.thekidsbiblestories.com/dashboard?payment=success';
 const STRIPE_CHECKOUT_CANCEL_URL = process.env.STRIPE_CHECKOUT_CANCEL_URL || 'https://app.thekidsbiblestories.com/dashboard?payment=cancel';
