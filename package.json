@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -e js,ejs,html,css index.js"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +26,8 @@
     "nodemailer": "^9.0.0",
     "sqlite3": "^6.0.1",
     "supertest": "^7.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

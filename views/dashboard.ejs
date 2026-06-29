@@ -65,12 +65,12 @@
     }
 
     .video-form-card {
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      border-radius: 14px;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-      padding: 14px;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
-      margin-bottom: 14px;
+      border: 1px solid #e4e4e7;
+      border-radius: 8px;
+      background: #fafafa;
+      padding: 16px;
+      box-shadow: none;
+      margin-bottom: 16px;
     }
     .video-form-label {
       display: flex;
@@ -91,12 +91,12 @@
     }
     .upload-progress-wrap {
       display: none;
-      margin: 0 0 14px;
-      padding: 12px 14px;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+      margin: 0 0 16px;
+      padding: 12px 16px;
+      border: 1px solid #e4e4e7;
+      border-radius: 8px;
+      background: #fafafa;
+      box-shadow: none;
     }
     .upload-progress-label {
       display: flex;
@@ -377,7 +377,8 @@
       font-weight: 600 !important;
       display: flex !important;
       align-items: center !important;
-      height: 57px !important;
+      height: 57px !important; /* Standard height to match topbar */
+      padding-left: 20px !important;
     }
     .brand-link .brand-text {
       color: #09090b !important;
@@ -385,80 +386,51 @@
     }
     .sidebar {
       background-color: #ffffff !important;
-    }
-    /* Sidebar User Panel Styling */
-    .sidebar-user-panel {
-      display: flex !important;
-      align-items: center !important;
-      padding: 12px 16px !important;
-      margin: 12px 12px 8px 12px !important;
-      border: 1px solid #e4e4e7 !important;
-      border-radius: 8px !important;
-      background-color: #fafafa !important;
-    }
-    .sidebar-user-panel img {
-      width: 32px !important;
-      height: 32px !important;
-      border-radius: 50% !important;
-      margin-right: 10px !important;
-      object-fit: cover !important;
-      border: 1px solid #e4e4e7 !important;
-    }
-    .sidebar-user-panel .user-info {
-      display: flex !important;
-      flex-direction: column !important;
-      overflow: hidden !important;
-      line-height: 1.2 !important;
-    }
-    .sidebar-user-panel .user-name {
-      font-size: 13px !important;
-      font-weight: 600 !important;
-      color: #09090b !important;
-      white-space: nowrap !important;
-      text-overflow: ellipsis !important;
-      overflow: hidden !important;
-    }
-    .sidebar-user-panel .user-role {
-      font-size: 11px !important;
-      color: #71717a !important;
-      font-weight: 500 !important;
+      padding-top: 8px !important;
     }
     /* Nav items styling */
     .nav-sidebar .nav-item {
-      margin: 2px 8px !important;
+      margin: 4px 12px !important;
     }
     .nav-sidebar .nav-link {
-      border-radius: 6px !important;
-      color: #3f3f46 !important;
-      font-size: 13.5px !important;
+      border-radius: 8px !important; /* Slightly rounder like Shadcn default */
+      color: #71717a !important; /* text-muted-foreground */
+      font-size: 14px !important;
       font-weight: 500 !important;
-      padding: 8px 12px !important;
+      padding: 10px 14px !important;
       display: flex !important;
       align-items: center !important;
-      transition: background-color 0.15s, color 0.15s !important;
+      transition: all 0.2s ease !important;
       width: auto !important;
       box-sizing: border-box !important;
+      margin-bottom: 2px !important;
     }
     .nav-sidebar .nav-link i {
-      color: #71717a;
-      font-size: 14px !important;
-      width: 20px !important;
-      margin-right: 10px !important;
+      color: #a1a1aa;
+      font-size: 16px !important;
+      width: 24px !important;
+      margin-right: 12px !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
+      transition: color 0.2s ease !important;
+    }
+    .nav-sidebar .nav-link p {
+      margin: 0 !important;
+      line-height: 1.4 !important;
     }
     /* Active Link state */
     .nav-sidebar .nav-link.active {
-      background-color: #18181b !important;
-      color: #ffffff !important;
+      background-color: #f4f4f5 !important; /* bg-accent */
+      color: #09090b !important; /* text-accent-foreground */
+      font-weight: 600 !important;
     }
     .nav-sidebar .nav-link.active i {
-      color: #ffffff !important;
+      color: #09090b !important;
     }
     /* Hover state */
     .nav-sidebar .nav-link:hover:not(.active) {
-      background-color: #f4f4f5 !important;
+      background-color: #fafafa !important;
       color: #09090b !important;
     }
     .nav-sidebar .nav-link:hover:not(.active) i {
@@ -466,13 +438,14 @@
     }
     /* Sidebar Headers */
     .nav-sidebar .nav-header {
-      color: #71717a !important;
-      font-size: 10.5px !important;
-      font-weight: 600 !important;
+      color: #a1a1aa !important;
+      font-size: 11.5px !important;
+      font-weight: 700 !important;
       text-transform: uppercase !important;
       letter-spacing: 0.05em !important;
-      padding: 12px 12px 4px 12px !important;
-      margin-top: 8px !important;
+      padding: 24px 12px 8px 16px !important;
+      margin-top: 4px !important;
+      margin-bottom: 4px !important;
     }
     /* Light style sidebar toggle / brand icon update */
     .brand-link i {
@@ -510,17 +483,18 @@
     .card {
       background-color: #ffffff !important;
       border: 1px solid #e4e4e7 !important;
-      border-radius: 8px !important;
+      border-radius: 12px !important;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
       margin-bottom: 1.5rem !important;
+      overflow: hidden !important;
     }
-    .card-primary, .card-info, .card-success, .card-warning, .card-outline, .card-danger {
-      border-top: 1px solid #e4e4e7 !important; /* Remove colored top line */
+    .card-primary, .card-info, .card-success, .card-warning, .card-outline, .card-danger, .card-purple, .card-dark {
+      border-top: none !important; /* Remove colored top line */
     }
     .card-header {
       background-color: #ffffff !important;
       border-bottom: 1px solid #e4e4e7 !important;
-      padding: 1rem 1.25rem !important;
+      padding: 1.25rem 1.5rem !important;
       color: #09090b !important;
     }
     .card-title {
@@ -628,14 +602,14 @@
       border-color: #e4e4e7 !important;
     }
     .btn-danger {
-      background-color: #ef4444 !important;
-      color: #ffffff !important;
-      border: 1px solid #ef4444 !important;
+      background-color: #ffffff !important;
+      color: #18181b !important;
+      border: 1px solid #e4e4e7 !important;
     }
     .btn-danger:hover {
-      background-color: #dc2626 !important;
-      border-color: #dc2626 !important;
-      color: #ffffff !important;
+      background-color: #f4f4f5 !important;
+      border-color: #18181b !important;
+      color: #09090b !important;
     }
     
     /* Inputs, Select, Textareas */
@@ -654,61 +628,124 @@
       border-color: #18181b !important;
       box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.1) !important;
     }
+    .custom-file {
+      cursor: pointer !important;
+    }
     .custom-file-label {
-      border: 1px solid #e4e4e7 !important;
+      border: 1px dashed #d4d4d8 !important;
       border-radius: 6px !important;
-      background-color: #ffffff !important;
+      background-color: #fafafa !important;
       color: #71717a !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+      padding-top: 0.4rem !important;
+      height: calc(2.25rem + 6px) !important;
+    }
+    .custom-file-label:hover {
+      background-color: #f4f4f5 !important;
+      border-color: #a1a1aa !important;
     }
     .custom-file-input:focus ~ .custom-file-label {
       border-color: #18181b !important;
       box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.1) !important;
     }
     .custom-file-label::after {
-      background-color: #f4f4f5 !important;
-      color: #18181b !important;
-      border-left: 1px solid #e4e4e7 !important;
-      border-radius: 0 6px 6px 0 !important;
+      background-color: #18181b !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 4px !important;
+      cursor: pointer !important;
+      font-weight: 500 !important;
+      margin: 3px !important;
+      padding: 4px 14px !important;
+      height: auto !important;
+      line-height: 1.4 !important;
+      transition: background-color 0.2s ease !important;
+    }
+    .custom-file-label:hover::after {
+      background-color: #27272a !important;
     }
     
-    /* Tables */
+    /* Better default file inputs (non-custom) */
+    input[type=file].form-control-file {
+      display: block;
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      border: 1px dashed #d4d4d8 !important;
+      border-radius: 6px !important;
+      background: #fafafa !important;
+      font-size: 14px !important;
+      color: #71717a !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+    }
+    input[type=file].form-control-file:hover {
+      background: #f4f4f5 !important;
+      border-color: #a1a1aa !important;
+    }
+    input[type=file].form-control-file::file-selector-button {
+      border: none !important;
+      background: #18181b !important;
+      padding: 6px 14px !important;
+      border-radius: 4px !important;
+      color: #ffffff !important;
+      font-weight: 500 !important;
+      cursor: pointer !important;
+      margin-right: 12px !important;
+      transition: all 0.2s ease !important;
+    }
+    input[type=file].form-control-file::file-selector-button:hover {
+      background: #27272a !important;
+    }
+    
+    /* Premium Shadcn UI Tables */
     table.table {
       border-collapse: collapse !important;
       width: 100% !important;
+      background-color: transparent !important;
     }
-    table.table-bordered {
-      border: 1px solid #e4e4e7 !important;
+    /* Remove default AdminLTE table borders */
+    table.table-bordered, table.table-bordered th, table.table-bordered td {
+      border: none !important;
     }
-    table.table-bordered th, table.table-bordered td {
-      border: 1px solid #e4e4e7 !important;
-      padding: 10px 12px !important;
+    table.table th, table.table td {
+      padding: 14px 16px !important;
       vertical-align: middle !important;
+      border-bottom: 1px solid #e4e4e7 !important;
     }
     table.table th {
-      background-color: #fdfdfd !important;
+      background-color: transparent !important;
       color: #71717a !important;
-      font-size: 12px !important;
-      font-weight: 600 !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.05em !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      text-align: left !important;
+      border-bottom: 1px solid #e4e4e7 !important;
+      text-transform: none !important;
+      letter-spacing: normal !important;
     }
     table.table td {
       color: #09090b !important;
-      font-size: 13.5px !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+    }
+    table.table tbody tr {
+      transition: background-color 0.2s ease !important;
     }
     table.table-striped tbody tr:nth-of-type(odd) {
-      background-color: #fafafa !important;
+      background-color: transparent !important;
     }
     table.table-hover tbody tr:hover {
       background-color: #f4f4f5 !important;
     }
     
-    /* Badges */
+    /* Clean, Modern Badges */
     .badge {
       font-weight: 500 !important;
       font-size: 12px !important;
-      padding: 4px 8px !important;
-      border-radius: 9999px !important;
+      padding: 4px 10px !important;
+      border-radius: 6px !important;
+      letter-spacing: 0.02em;
+      text-transform: none !important;
     }
     .badge-info {
       background-color: #f4f4f5 !important;
@@ -726,9 +763,9 @@
       border: 1px solid #fef3c7 !important;
     }
     .badge-danger {
-      background-color: #fef2f2 !important;
-      color: #dc2626 !important;
-      border: 1px solid #fee2e2 !important;
+      background-color: #ffffff !important;
+      color: #18181b !important;
+      border: 1px solid #18181b !important;
     }
     .badge-dark {
       background-color: #18181b !important;
@@ -755,26 +792,61 @@
       padding: 1rem !important;
     }
     
-    /* DataTables Pagination & Length Select Custom Styling */
-    .dataTables_wrapper .dataTables_paginate .paginate_button {
-      border-radius: 6px !important;
-      border: 1px solid #e4e4e7 !important;
-      background-color: #ffffff !important;
-      color: #18181b !important;
-      padding: 4px 10px !important;
-      margin: 0 2px !important;
+    /* Premium DataTables Styling with Multi-Filtering */
+    .dataTables_wrapper { padding: 0 !important; }
+    .dataTables_wrapper .row { margin: 0 !important; align-items: center !important; }
+    .dataTables_length, .dataTables_filter { padding: 1rem 0 !important; margin-bottom: 0.5rem !important; }
+    .dataTables_length select, .dataTables_filter input {
+      border: 1px solid #e4e4e7 !important; border-radius: 6px !important;
+      padding: 4px 8px !important; font-size: 13px !important; outline: none !important;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease !important; background: #ffffff !important;
     }
-    .dataTables_wrapper .dataTables_paginate .paginate_button.current, 
-    .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-      background-color: #18181b !important;
-      border-color: #18181b !important;
-      color: #ffffff !important;
+    .dataTables_length select:focus, .dataTables_filter input:focus {
+      border-color: #18181b !important; box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.1) !important;
     }
-    .dataTables_wrapper .dataTables_filter input {
-      margin-left: 0.5em !important;
-      display: inline-block !important;
-      width: auto !important;
+    
+    /* Robust Column Filters UI */
+    .filters th {
+      padding: 6px 8px !important; 
+      background-color: #ffffff !important; 
+      border-bottom: 1px solid #e4e4e7 !important;
+      border-top: none !important;
     }
+    .dt-column-filter {
+      font-size: 12px !important; padding: 4px 8px !important; height: 30px !important;
+      font-weight: 400 !important; width: 100% !important; border: 1px solid #e4e4e7 !important;
+      border-radius: 4px !important; background: #ffffff !important; outline: none !important;
+      box-sizing: border-box !important; color: #09090b !important;
+      transition: all 0.15s ease !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
+    }
+    .dt-column-filter::placeholder { color: #a1a1aa !important; }
+    .dt-column-filter:focus { border-color: #18181b !important; box-shadow: 0 0 0 1px #18181b !important; }
+    
+    table.dataTable thead th, table.dataTable thead td { border-bottom: 1px solid #e4e4e7 !important; }
+    table.dataTable.no-footer { border-bottom: 1px solid #e4e4e7 !important; }
+    .dataTables_info, .dataTables_paginate { padding: 1rem 0 !important; font-size: 13px !important; color: #71717a !important; }
+    .dataTables_paginate .paginate_button {
+      padding: 4px 10px !important; margin: 0 2px !important; border-radius: 6px !important;
+      border: 1px solid transparent !important; color: #3f3f46 !important; cursor: pointer !important; background: transparent !important;
+    }
+    .dataTables_paginate .paginate_button:hover:not(.disabled) { background: #f4f4f5 !important; border-color: #e4e4e7 !important; color: #09090b !important; }
+    .dataTables_paginate .paginate_button.current, .dataTables_paginate .paginate_button.current:hover {
+      background: #18181b !important; border-color: #18181b !important; color: #ffffff !important; box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+    }
+    .dataTables_paginate .paginate_button.disabled { color: #a1a1aa !important; cursor: not-allowed !important; }
+    
+    /* Sorting Icons */
+    table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc {
+      background-image: none !important; position: relative !important; padding-right: 20px !important; cursor: pointer;
+    }
+    table.dataTable thead .sorting::after, table.dataTable thead .sorting_asc::after, table.dataTable thead .sorting_desc::after {
+      font-family: "Font Awesome 5 Free"; font-weight: 900; position: absolute; right: 4px; top: 50%;
+      transform: translateY(-50%); font-size: 12px;
+    }
+    table.dataTable thead .sorting::after { content: "\f0dc"; opacity: 0.2; }
+    table.dataTable thead .sorting_asc::after { content: "\f0de"; opacity: 0.8; color: #18181b; }
+    table.dataTable thead .sorting_desc::after { content: "\f0dd"; opacity: 0.8; color: #18181b; }
     
     /* Alert Messages */
     .alert {
@@ -789,14 +861,14 @@
       border-color: #a7f3d0 !important;
     }
     .alert-danger {
-      background-color: #fef2f2 !important;
-      color: #991b1b !important;
-      border-color: #fca5a5 !important;
+      background-color: #fafafa !important;
+      color: #18181b !important;
+      border-color: #18181b !important;
     }
     .alert-warning {
-      background-color: #fffbeb !important;
-      color: #92400e !important;
-      border-color: #fde68a !important;
+      background-color: #f4f4f5 !important;
+      color: #18181b !important;
+      border-color: #e4e4e7 !important;
     }
     
     /* Footer styling */
@@ -875,11 +947,18 @@
       gap: 8px;
     }
     #videoModal .header-save-btn {
-      border-radius: 999px;
-      padding: 0.55rem 0.9rem;
-      font-weight: 700;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      font-weight: 600;
+      font-size: 13px;
+      box-shadow: none;
       white-space: nowrap;
+      border: 1px solid transparent;
+      background: #18181b;
+      color: #ffffff;
+    }
+    #videoModal .header-save-btn:hover {
+      background: #27272a;
     }
     .offcanvas-body-sheet {
       padding: 1.5rem !important;
@@ -898,17 +977,18 @@
       gap: 8px;
     }
     .offcanvas-footer-sheet .btn {
-      min-width: 132px;
-      border-radius: 14px;
-      padding: 0.8rem 1.2rem;
-      font-weight: 700;
+      min-width: 120px;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      font-size: 14px;
       border: 1px solid transparent;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      transition: background-color 0.15s ease, border-color 0.15s ease;
     }
     .offcanvas-footer-sheet .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.14);
+      transform: none;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     }
     .offcanvas-footer-sheet .btn-secondary {
       background: #fff;
@@ -928,7 +1008,9 @@
       color: #fff;
     }
     .offcanvas-footer-sheet .btn-danger {
-      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      background: #ffffff;
+      color: #18181b;
+      border-color: #e4e4e7;
     }
     .offcanvas-footer-sheet .btn-success {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -942,7 +1024,11 @@
     .offcanvas-footer-sheet .btn-warning {
       background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     }
-    .offcanvas-footer-sheet .btn-danger:hover,
+    .offcanvas-footer-sheet .btn-danger:hover {
+      background: #f4f4f5;
+      color: #09090b;
+      border-color: #18181b;
+    }
     .offcanvas-footer-sheet .btn-success:hover,
     .offcanvas-footer-sheet .btn-primary:hover,
     .offcanvas-footer-sheet .btn-info:hover,
@@ -954,34 +1040,29 @@
     .video-editor-view .form-group {
       margin-bottom: 1rem;
     }
+    .offcanvas-sheet .form-group label,
+    .video-editor-view .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #3f3f46;
+      margin-bottom: 6px;
+    }
     .offcanvas-sheet .form-control,
     .offcanvas-sheet .custom-select,
     .video-editor-view .form-control,
     .video-editor-view .custom-select {
-      border-radius: 14px;
-      min-height: 46px;
-      border-color: #dbe3ee;
+      border-radius: 6px;
+      min-height: 40px;
+      border-color: #e4e4e7;
       box-shadow: none;
+      font-size: 14px;
     }
     .offcanvas-sheet .form-control:focus,
     .offcanvas-sheet .custom-select:focus,
     .video-editor-view .form-control:focus,
     .video-editor-view .custom-select:focus {
-      border-color: #ef4444;
-      box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.12);
-    }
-    .offcanvas-sheet .form-control-file,
-    .video-editor-view .form-control-file {
-      display: block;
-      width: 100%;
-      padding: 0.8rem 1rem;
-      border: 1px dashed #cbd5e1;
-      border-radius: 14px;
-      background: #f8fafc;
-    }
-    .offcanvas-sheet .form-control-file:hover,
-    .video-editor-view .form-control-file:hover {
-      background: #f1f5f9;
+      border-color: #18181b;
+      box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.1);
     }
     #videoModal .offcanvas-body-sheet,
     #musicItemModal .offcanvas-body-sheet,
@@ -1001,10 +1082,10 @@
       height: auto !important;
       min-height: auto !important;
       display: block !important;
-      background: #fff;
+      background: #ffffff;
       border: 1px solid #e4e4e7;
-      border-radius: 18px;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.10) !important;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05) !important;
       overflow: hidden;
       margin: 0 auto 2rem;
     }
@@ -1095,7 +1176,7 @@
   <aside class="main-sidebar sidebar-light-primary">
     <!-- Brand Logo -->
     <a href="#" class="brand-link pl-4">
-      <span class="brand-text font-weight-bold" style="font-size: 18px; letter-spacing: -0.03em;">CMS<span style="font-weight: 400; color: #71717a;">Dashboard</span></span>
+      <span class="brand-text font-weight-bold" style="font-size: 18px; letter-spacing: -0.03em;">KidsBibleApp<span style="font-weight: 400; color: #71717a;"> Dashboard</span></span>
     </a>
 
     <!-- Sidebar -->
@@ -1104,6 +1185,12 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
+          <li class="nav-item">
+            <a href="#" class="nav-link active" id="nav-stats">
+              <i class="nav-icon fas fa-home"></i>
+              <p data-i18n="dashboardOverview">Dashboard</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link" id="nav-products">
               <i class="nav-icon fas fa-shopping-bag"></i>
@@ -1193,11 +1280,11 @@
                       <span class="text-xs font-weight-bold text-uppercase tracking-wider text-muted d-block mb-1" data-i18n="totalCatalogItems">Total Catalog Items</span>
                       <h3 class="font-weight-bold m-0" id="catalogsCount" style="font-size: 26px; color: #09090b; letter-spacing: -0.02em;">0</h3>
                     </div>
-                    <div class="d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #e0f2fe; border-radius: 8px; color: #0284c7;">
+                    <div class="d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #f4f4f5; border-radius: 8px; color: #18181b;">
                       <i class="fas fa-book-open" style="font-size: 18px;"></i>
                     </div>
                   </div>
-                  <a href="#" class="d-flex align-items-center text-xs font-weight-semibold text-info" onclick="$('#nav-catalogs-list').trigger('click'); return false;" style="gap: 4px; text-decoration: none;">
+                  <a href="#" class="d-flex align-items-center text-xs font-weight-semibold text-dark" onclick="$('#nav-catalogs-list').trigger('click'); return false;" style="gap: 4px; text-decoration: none;">
                     <span data-i18n="viewDetails">View Details</span> <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                   </a>
                 </div>
@@ -1213,11 +1300,11 @@
                       <span class="text-xs font-weight-bold text-uppercase tracking-wider text-muted d-block mb-1" data-i18n="users">Users</span>
                       <h3 class="font-weight-bold m-0" id="usersCount" style="font-size: 26px; color: #09090b; letter-spacing: -0.02em;">0</h3>
                     </div>
-                    <div class="d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #dcfce7; border-radius: 8px; color: #15803d;">
+                    <div class="d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #f4f4f5; border-radius: 8px; color: #18181b;">
                       <i class="fas fa-users" style="font-size: 18px;"></i>
                     </div>
                   </div>
-                  <a href="#" class="d-flex align-items-center text-xs font-weight-semibold text-success" onclick="$('#nav-users').trigger('click'); return false;" style="gap: 4px; text-decoration: none;">
+                  <a href="#" class="d-flex align-items-center text-xs font-weight-semibold text-dark" onclick="$('#nav-users').trigger('click'); return false;" style="gap: 4px; text-decoration: none;">
                     <span data-i18n="viewDetails">View Details</span> <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                   </a>
                 </div>
@@ -1233,11 +1320,11 @@
                       <span class="text-xs font-weight-bold text-uppercase tracking-wider text-muted d-block mb-1" data-i18n="payments">Payments</span>
                       <h3 class="font-weight-bold m-0" id="paymentsCount" style="font-size: 26px; color: #09090b; letter-spacing: -0.02em;">0</h3>
                     </div>
-                    <div class="d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #fef3c7; border-radius: 8px; color: #b45309;">
+                    <div class="d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #f4f4f5; border-radius: 8px; color: #18181b;">
                       <i class="fas fa-credit-card" style="font-size: 18px;"></i>
                     </div>
                   </div>
-                  <a href="#" class="d-flex align-items-center text-xs font-weight-semibold text-warning" onclick="$('#nav-payments').trigger('click'); return false;" style="gap: 4px; text-decoration: none; color: #d97706 !important;">
+                  <a href="#" class="d-flex align-items-center text-xs font-weight-semibold text-dark" onclick="$('#nav-payments').trigger('click'); return false;" style="gap: 4px; text-decoration: none; color: #18181b !important;">
                     <span data-i18n="viewDetails">View Details</span> <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                   </a>
                 </div>
@@ -1253,11 +1340,11 @@
                       <span class="text-xs font-weight-bold text-uppercase tracking-wider text-muted d-block mb-1" data-i18n="notifications">Notifications</span>
                       <h3 class="font-weight-bold m-0" id="notificationsCount" style="font-size: 26px; color: #09090b; letter-spacing: -0.02em;">0</h3>
                     </div>
-                    <div class="d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #fee2e2; border-radius: 8px; color: #b91c1c;">
+                    <div class="d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #f4f4f5; border-radius: 8px; color: #18181b;">
                       <i class="fas fa-bell" style="font-size: 18px;"></i>
                     </div>
                   </div>
-                  <a href="#" class="d-flex align-items-center text-xs font-weight-semibold text-danger" onclick="$('#nav-notifications').trigger('click'); return false;" style="gap: 4px; text-decoration: none;">
+                  <a href="#" class="d-flex align-items-center text-xs font-weight-semibold text-dark" onclick="$('#nav-notifications').trigger('click'); return false;" style="gap: 4px; text-decoration: none;">
                     <span data-i18n="viewDetails">View Details</span> <i class="fas fa-chevron-right" style="font-size: 10px;"></i>
                   </a>
                 </div>
@@ -1266,9 +1353,9 @@
           </div>
 
           <!-- Welcome Jumbotron Card -->
-          <div class="card card-primary card-outline mt-4">
-            <div class="card-header d-flex align-items-center">
-              <i class="fas fa-info-circle text-info mr-2" style="font-size: 18px;"></i>
+          <div class="card card-dark card-outline mt-4 border-light shadow-sm">
+            <div class="card-header d-flex align-items-center bg-white border-bottom-0">
+              <i class="fas fa-cube text-dark mr-2" style="font-size: 18px;"></i>
               <h5 class="m-0 font-weight-bold" data-i18n="welcomeTitle">CMS Panel</h5>
             </div>
             <div class="card-body">
@@ -1281,10 +1368,10 @@
 
         <!-- Section 2: Catalogs List -->
         <div class="content-section d-none" id="catalogs-list-section">
-          <div class="card card-primary card-outline">
+          <div class="card card-dark card-outline">
             <div class="card-header">
               <h3 class="card-title font-weight-bold text-dark m-0">
-                <i class="fas fa-folder-open text-warning mr-1"></i> <span data-i18n="registeredVisualPublications">Registered Visual Publications</span>
+                <i class="fas fa-folder-open text-dark mr-1"></i> <span data-i18n="registeredVisualPublications">Registered Visual Publications</span>
               </h3>
             </div>
             <div class="card-body">
@@ -1309,8 +1396,8 @@
 
         <!-- Section 3: Add Catalog Item -->
         <div class="content-section d-none" id="add-catalog-section">
-          <div class="card card-primary">
-            <div class="card-header">
+          <div class="card card-dark">
+            <div class="card-header" style="background-color: #18181b; color: #fff;">
               <h3 class="card-title font-weight-bold"><i class="fas fa-plus-circle mr-1"></i> <span data-i18n="addNewVisualPublication">Add New Visual Publication</span></h3>
             </div>
             <form id="addCatalogForm" enctype="multipart/form-data">
@@ -1378,8 +1465,8 @@
 
               </div>
               <!-- /.card-body -->
-              <div class="card-footer bg-light d-flex justify-content-end">
-                <button type="submit" class="btn btn-success px-4 elevation-1" id="submitBtn">
+              <div class="card-footer bg-light d-flex justify-content-end border-top">
+                <button type="submit" class="btn btn-dark px-4 elevation-1" id="submitBtn" style="background-color: #18181b; border-color: #18181b;">
                   <i class="fas fa-save mr-1"></i> <span data-i18n="saveUploadPublication">Save & Upload Publication</span>
                 </button>
               </div>
@@ -1389,13 +1476,13 @@
 
         <!-- Section 3.1: Categories -->
         <div class="content-section d-none" id="categories-section">
-          <div class="card card-warning card-outline">
+          <div class="card card-dark card-outline">
             <div class="card-header">
               <h3 class="card-title font-weight-bold text-dark m-0">
-                <i class="fas fa-tags text-warning mr-1"></i> Categories
+                <i class="fas fa-tags text-dark mr-1"></i> Categories
               </h3>
               <div class="card-tools">
-                <button class="btn btn-success btn-sm" onclick="openAddCategoryModal()"><i class="fas fa-plus mr-1"></i> Add Category</button>
+                <button class="btn btn-dark btn-sm text-white" style="background-color: #18181b; border-color: #18181b;" onclick="openAddCategoryModal()"><i class="fas fa-plus mr-1"></i> Add Category</button>
               </div>
             </div>
             <div class="card-body">
@@ -1423,13 +1510,13 @@
 
         <!-- Section 3.2: Stories -->
         <div class="content-section d-none" id="stories-section">
-          <div class="card card-success card-outline">
+          <div class="card card-dark card-outline">
             <div class="card-header">
               <h3 class="card-title font-weight-bold text-dark m-0">
-                <i class="fas fa-book text-success mr-1"></i> Stories
+                <i class="fas fa-book text-dark mr-1"></i> Stories
               </h3>
               <div class="card-tools">
-                <button class="btn btn-success btn-sm" onclick="openAddStoryModal()"><i class="fas fa-plus mr-1"></i> Add Story</button>
+                <button class="btn btn-dark btn-sm text-white" style="background-color: #18181b; border-color: #18181b;" onclick="openAddStoryModal()"><i class="fas fa-plus mr-1"></i> Add Story</button>
               </div>
             </div>
             <div class="card-body">
@@ -1459,13 +1546,13 @@
 
         <!-- Section 3.3: Audio Items -->
         <div class="content-section d-none" id="audio-items-section">
-          <div class="card card-primary card-outline">
+          <div class="card card-dark card-outline">
             <div class="card-header">
               <h3 class="card-title font-weight-bold text-dark m-0">
-                <i class="fas fa-music text-primary mr-1"></i> Audio Items
+                <i class="fas fa-music text-dark mr-1"></i> Audio Items
               </h3>
               <div class="card-tools">
-                <button class="btn btn-success btn-sm" onclick="openAddAudioItemModal()"><i class="fas fa-plus mr-1"></i> Add Audio Item</button>
+                <button class="btn btn-dark btn-sm text-white" style="background-color: #18181b; border-color: #18181b;" onclick="openAddAudioItemModal()"><i class="fas fa-plus mr-1"></i> Add Audio Item</button>
               </div>
             </div>
             <div class="card-body">
@@ -1495,13 +1582,13 @@
 
         <!-- Section 3.3.5: Audio Items -->
         <div class="content-section d-none" id="music-items-section">
-          <div class="card card-purple card-outline" style="border-top: 3px solid #6f42c1;">
+          <div class="card card-dark card-outline">
             <div class="card-header">
               <h3 class="card-title font-weight-bold text-dark m-0">
-                <i class="fas fa-music text-purple mr-1" style="color: #6f42c1;"></i> Audio Items
+                <i class="fas fa-music text-dark mr-1"></i> Audio Items
               </h3>
               <div class="card-tools">
-                <button class="btn btn-success btn-sm" onclick="openAddMusicItemModal()"><i class="fas fa-plus mr-1"></i> Add Music</button>
+                <button class="btn btn-dark btn-sm text-white" style="background-color: #18181b; border-color: #18181b;" onclick="openAddMusicItemModal()"><i class="fas fa-plus mr-1"></i> Add Music</button>
               </div>
             </div>
             <div class="card-body">
@@ -1528,13 +1615,13 @@
 
         <!-- Section 3.4: Products -->
         <div class="content-section d-none" id="products-section">
-          <div class="card card-info card-outline">
+          <div class="card card-dark card-outline">
             <div class="card-header">
               <h3 class="card-title font-weight-bold text-dark m-0">
-                <i class="fas fa-shopping-cart text-info mr-1"></i> Products (Store Items)
+                <i class="fas fa-shopping-cart text-dark mr-1"></i> Products (Store Items)
               </h3>
               <div class="card-tools">
-                <button class="btn btn-success btn-sm" onclick="openAddProductModal()"><i class="fas fa-plus mr-1"></i> Add Product</button>
+                <button class="btn btn-dark btn-sm text-white" style="background-color: #18181b; border-color: #18181b;" onclick="openAddProductModal()"><i class="fas fa-plus mr-1"></i> Add Product</button>
               </div>
             </div>
             <div class="card-body">
@@ -1562,13 +1649,13 @@
 
         <!-- Section 3.5: Videos -->
         <div class="content-section d-none" id="videos-section">
-          <div class="card card-danger card-outline">
+          <div class="card card-dark card-outline">
             <div class="card-header">
               <h3 class="card-title font-weight-bold text-dark m-0">
-                <i class="fas fa-video text-danger mr-1"></i> Videos
+                <i class="fas fa-video text-dark mr-1"></i> Videos
               </h3>
               <div class="card-tools">
-                <button class="btn btn-danger btn-sm" onclick="openAddVideoModal()">
+                <button class="btn btn-dark btn-sm text-white" style="background-color: #18181b; border-color: #18181b;" onclick="openAddVideoModal()">
                   <i class="fas fa-plus mr-1"></i> Add Video
                 </button>
               </div>
@@ -1737,10 +1824,10 @@
 
         <!-- Section 5: Users List -->
         <div class="content-section d-none" id="users-section">
-          <div class="card card-info card-outline">
+          <div class="card card-dark card-outline">
             <div class="card-header">
               <h3 class="card-title font-weight-bold text-dark m-0">
-                <i class="fas fa-users text-info mr-1"></i> <span data-i18n="users">Users</span>
+                <i class="fas fa-users text-dark mr-1"></i> <span data-i18n="users">Users</span>
               </h3>
             </div>
             <div class="card-body">
@@ -1832,7 +1919,7 @@
 
         <!-- Section 6: Payments List -->
         <div class="content-section d-none" id="payments-section">
-          <div class="card card-success card-outline">
+          <div class="card card-dark card-outline">
             <div class="card-header">
               <h3 class="card-title font-weight-bold text-dark m-0">
                 <i class="fab fa-stripe mr-1"></i> <span data-i18n="payments">Payments</span>
@@ -1867,8 +1954,8 @@
         <div class="content-section d-none" id="notifications-section">
           <div class="row">
             <div class="col-md-4">
-              <div class="card card-primary">
-                <div class="card-header">
+              <div class="card card-dark">
+                <div class="card-header" style="background-color: #18181b; color: #fff;">
                   <h3 class="card-title font-weight-bold"><i class="fas fa-paper-plane mr-1"></i> <span data-i18n="sendNotification">Send Notification</span></h3>
                 </div>
                 <form id="sendNotificationForm">
@@ -1896,17 +1983,17 @@
                       <input type="text" class="form-control" id="notifSentTo" placeholder="all" value="all" required>
                     </div>
                   </div>
-                  <div class="card-footer bg-light">
-                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane mr-1"></i> <span data-i18n="sendNotification">Send Notification</span></button>
+                  <div class="card-footer bg-light border-top">
+                    <button type="submit" class="btn btn-dark btn-block" style="background-color: #18181b; border-color: #18181b;"><i class="fas fa-paper-plane mr-1"></i> <span data-i18n="sendNotification">Send Notification</span></button>
                   </div>
                 </form>
               </div>
             </div>
             <div class="col-md-8">
-              <div class="card card-primary card-outline">
+              <div class="card card-dark card-outline">
                 <div class="card-header">
                   <h3 class="card-title font-weight-bold text-dark m-0">
-                    <i class="fas fa-bell text-info mr-1"></i> <span data-i18n="notifications">Notifications</span>
+                    <i class="fas fa-bell text-dark mr-1"></i> <span data-i18n="notifications">Notifications</span>
                   </h3>
                 </div>
                 <div class="card-body">
@@ -2097,6 +2184,79 @@
       $('#pageTitle').text(locales[lang][activeText]);
       $('#breadcrumbActive').text(locales[lang][activeText]);
     }
+  }
+
+  // Global DataTable Initialization with Robust Multi-Filtering
+  function initAppDataTable(selector) {
+    if ($.fn.DataTable.isDataTable(selector)) {
+      $(selector).DataTable().destroy();
+    }
+
+    const $table = $(selector);
+    
+    // Clear any old filter row completely before recreating it
+    $table.find('thead tr.filters').remove();
+    
+    // Create new filter row
+    const $filterRow = $table.find('thead tr').eq(0).clone(true).addClass('filters');
+    $table.find('thead').append($filterRow);
+    
+    // Clear cloned contents completely to avoid detached listeners
+    $filterRow.find('th').each(function() {
+      $(this).removeClass('sorting sorting_asc sorting_desc').off('click').html('');
+    });
+
+    const table = $table.DataTable({
+      responsive: true,
+      autoWidth: false,
+      pageLength: 10,
+      lengthMenu: [10, 25, 50, 100],
+      orderCellsTop: true, // Crucial: sorts on the first top row, not the second filter row
+      language: currentLang === 'tr' ? {
+        search: "Genel Ara:",
+        lengthMenu: "_MENU_ kayıt göster",
+        info: "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
+        infoEmpty: "Kayıt yok",
+        infoFiltered: "(_MAX_ kayıt içerisinden filtrelendi)",
+        zeroRecords: "Eşleşen kayıt bulunamadı",
+        paginate: { first: "İlk", last: "Son", next: "Sonraki", previous: "Önceki" }
+      } : {
+        search: "Global Search:",
+        lengthMenu: "Show _MENU_ entries",
+        info: "Showing _START_ to _END_ of _TOTAL_ entries",
+        infoEmpty: "Showing 0 to 0 of 0 entries",
+        infoFiltered: "(filtered from _MAX_ total entries)",
+        zeroRecords: "No matching records found",
+        paginate: { first: "First", last: "Last", next: "Next", previous: "Previous" }
+      },
+      initComplete: function() {
+        const api = this.api();
+        
+        // Setup inputs inside the new filter row using the core API to resist responsive collapses
+        api.columns().eq(0).each(function(colIdx) {
+          const cell = $('.filters th', $table).eq(colIdx);
+          const title = $(api.column(colIdx).header()).text().trim();
+          
+          const excludeKeywords = ['Action', 'Actions', 'Aksiyon', 'İşlemler', 'Image', 'Resim', 'Cover', 'Banner', 'Vertical', 'Horizontal'];
+          const shouldExclude = excludeKeywords.some(kw => title.includes(kw));
+
+          if (!shouldExclude && title !== '') {
+            $(cell).html(`
+              <input type="text" class="dt-column-filter" placeholder="Filter ${title}..." />
+            `);
+
+            // Event listener using API colIdx explicitly
+            $('input', cell).off('keyup change clear').on('keyup change clear', function() {
+              if (api.column(colIdx).search() !== this.value) {
+                api.column(colIdx).search(this.value).draw();
+              }
+            });
+          }
+        });
+      }
+    });
+
+    return table;
   }
 
   function initLocalization() {
@@ -2445,46 +2605,7 @@
           
           $('#catalogsTableBody').html(rows);
 
-          // Build localization settings for DataTables
-          const trLangConfig = {
-            "search": "Ara:",
-            "lengthMenu": "_MENU_ kayıt göster",
-            "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-            "infoEmpty": "Kayıt yok",
-            "infoFiltered": "(_MAX_ kayıt içerisinden filtrelendi)",
-            "zeroRecords": "Eşleşen kayıt bulunamadı",
-            "paginate": {
-              "first": "İlk",
-              "last": "Son",
-              "next": "Sonraki",
-              "previous": "Önceki"
-            }
-          };
-
-          const enLangConfig = {
-            "search": "Search:",
-            "lengthMenu": "Show _MENU_ entries",
-            "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-            "infoEmpty": "Showing 0 to 0 of 0 entries",
-            "infoFiltered": "(filtered from _MAX_ total entries)",
-            "zeroRecords": "No matching records found",
-            "paginate": {
-              "first": "First",
-              "last": "Last",
-              "next": "Next",
-              "previous": "Previous"
-            }
-          };
-
-          // Initialize DataTable with settings
-          $('#catalogsTable').DataTable({
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false,
-            "pageLength": 5,
-            "lengthMenu": [5, 10, 25, 50],
-            "language": currentLang === 'tr' ? trLangConfig : enLangConfig
-          });
+          initAppDataTable('#catalogsTable');
         },
         error: function(xhr) {
           console.error('Failed to load catalogs', xhr);
@@ -2590,7 +2711,7 @@
             `;
           });
           $('#categoriesTableBody').html(rows);
-          $('#categoriesTable').DataTable({ "responsive": true, "autoWidth": false });
+          initAppDataTable('#categoriesTable');
         }
       });
     };
@@ -2714,7 +2835,7 @@
             `;
           });
           $('#storiesTableBody').html(rows);
-          $('#storiesTable').DataTable({ "responsive": true, "autoWidth": false });
+          initAppDataTable('#storiesTable');
         }
       });
     };
@@ -2856,7 +2977,7 @@
             `;
           });
           $('#audioItemsTableBody').html(rows);
-          $('#audioItemsTable').DataTable({ "responsive": true, "autoWidth": false });
+          initAppDataTable('#audioItemsTable');
         }
       });
     };
@@ -2995,7 +3116,7 @@
             `;
           });
           $('#musicItemsTableBody').html(rows);
-          $('#musicItemsTable').DataTable({ "responsive": true, "autoWidth": false });
+          initAppDataTable('#musicItemsTable');
         }
       });
     };
@@ -3127,7 +3248,7 @@
             `;
           });
           $('#productsTableBody').html(rows);
-          $('#productsTable').DataTable({ "responsive": true, "autoWidth": false });
+          initAppDataTable('#productsTable');
         }
       });
     };
@@ -3354,7 +3475,7 @@
             `;
           });
           $('#videosTableBody').html(rows);
-          $('#videosTable').DataTable({ "responsive": true, "autoWidth": false });
+          initAppDataTable('#videosTable');
         },
         error: function(err) {
           console.error('Video list could not be loaded', err.responseText || err.statusText || err);
@@ -3398,10 +3519,19 @@
       $('#videoUrl').val('');
       $('#videoSrtUrl').val('');
       setVideoOrderIndexFromServer();
-      $('#videoVerticalBannerPreviewContainer').hide();
-      $('#videoVerticalBannerPreview').attr('src', '');
+      $('#videoVerticalBannerPreview').addClass('d-none');
+      $('#videoVerticalBannerPreview img').attr('src', '');
+      $('#videoVerticalBannerInputWrapper').removeClass('d-none');
       openVideoEditorView();
     };
+
+    $(document).on('click', '#btnDeleteVideoVerticalBanner', function() {
+      $('#videoVerticalBannerUrl').val('');
+      $('#videoVerticalBannerFile').val('');
+      $('#videoVerticalBannerPreview').addClass('d-none');
+      $('#videoVerticalBannerPreview img').attr('src', '');
+      $('#videoVerticalBannerInputWrapper').removeClass('d-none');
+    });
 
     function normalizeCdnImageUrl(url, fallback) {
       if (!url) return fallback;
@@ -3434,11 +3564,13 @@
       $('#videoFile').val('');
       if (verticalBanner) {
         const displayImage = normalizeCdnImageUrl(verticalBanner, '/uploads/sample_vertical.jpg');
-        $('#videoVerticalBannerPreview').attr('src', displayImage);
-        $('#videoVerticalBannerPreviewContainer').show();
+        $('#videoVerticalBannerPreview img').attr('src', displayImage);
+        $('#videoVerticalBannerPreview').removeClass('d-none');
+        $('#videoVerticalBannerInputWrapper').addClass('d-none');
       } else {
-        $('#videoVerticalBannerPreview').attr('src', '/uploads/sample_vertical.jpg');
-        $('#videoVerticalBannerPreviewContainer').hide();
+        $('#videoVerticalBannerPreview img').attr('src', '');
+        $('#videoVerticalBannerPreview').addClass('d-none');
+        $('#videoVerticalBannerInputWrapper').removeClass('d-none');
       }
       openVideoEditorView();
     };
@@ -3681,24 +3813,7 @@
             `;
           });
           $('#usersTableBody').html(rows);
-
-          $('#usersTable').DataTable({
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false,
-            "pageLength": 10,
-            "language": currentLang === 'tr' ? {
-              "search": "Ara:",
-              "lengthMenu": "_MENU_ kayıt göster",
-              "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-              "zeroRecords": "Eşleşen kullanıcı bulunamadı"
-            } : {
-              "search": "Search:",
-              "lengthMenu": "Show _MENU_ entries",
-              "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-              "zeroRecords": "No matching users found"
-            }
-          });
+          initAppDataTable('#usersTable');
           updateDashboardStats();
         },
         error: function(err) {
@@ -3778,24 +3893,7 @@
             `;
           });
           $('#adminsTableBody').html(rows);
-
-          $('#adminsTable').DataTable({
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false,
-            "pageLength": 10,
-            "language": currentLang === 'tr' ? {
-              "search": "Ara:",
-              "lengthMenu": "_MENU_ kayıt göster",
-              "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-              "zeroRecords": "Eşleşen admin bulunamadı"
-            } : {
-              "search": "Search:",
-              "lengthMenu": "Show _MENU_ entries",
-              "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-              "zeroRecords": "No matching admins found"
-            }
-          });
+          initAppDataTable('#adminsTable');
         },
         error: function(err) {
           console.error('Failed to load admins', err);
@@ -3954,24 +4052,7 @@
             `;
           });
           $('#paymentsTableBody').html(rows);
-
-          $('#paymentsTable').DataTable({
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false,
-            "pageLength": 10,
-            "language": currentLang === 'tr' ? {
-              "search": "Ara:",
-              "lengthMenu": "_MENU_ kayıt göster",
-              "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-              "zeroRecords": "Eşleşen ödeme bulunamadı"
-            } : {
-              "search": "Search:",
-              "lengthMenu": "Show _MENU_ entries",
-              "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-              "zeroRecords": "No matching payments found"
-            }
-          });
+          initAppDataTable('#paymentsTable');
           updateDashboardStats();
         },
         error: function(err) {
@@ -4143,24 +4224,7 @@
             `;
           });
           $('#notificationsTableBody').html(rows);
-
-          $('#notificationsTable').DataTable({
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false,
-            "pageLength": 10,
-            "language": currentLang === 'tr' ? {
-              "search": "Ara:",
-              "lengthMenu": "_MENU_ kayıt göster",
-              "info": "_TOTAL_ kayıttan _START_ - _END_ arası gösteriliyor",
-              "zeroRecords": "Eşleşen bildirim bulunamadı"
-            } : {
-              "search": "Search:",
-              "lengthMenu": "Show _MENU_ entries",
-              "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-              "zeroRecords": "No matching notifications found"
-            }
-          });
+          initAppDataTable('#notificationsTable');
           updateDashboardStats();
         },
         error: function(err) {
@@ -4285,9 +4349,9 @@
 
 <!-- Edit User Modal -->
 <div class="offcanvas-sheet" id="editUserModal">
-  <div class="offcanvas-header-sheet bg-info text-white">
-    <h5 class="offcanvas-title font-weight-bold" id="editUserModalLabel">Edit User</h5>
-    <button type="button" class="close-btn text-white" onclick="closeOffcanvas('editUserModal')">&times;</button>
+  <div class="offcanvas-header-sheet" style="background-color: #ffffff; color: #09090b; border-bottom: 1px solid #e4e4e7;">
+    <h5 class="offcanvas-title font-weight-bold" id="editUserModalLabel" style="color: #09090b !important;">Edit User</h5>
+    <button type="button" class="close-btn" style="color: #71717a; font-size: 20px;" onclick="closeOffcanvas('editUserModal')">&times;</button>
   </div>
   <form id="editUserForm" class="h-100 d-flex flex-column m-0">
     <input type="hidden" id="editUserId">
@@ -4314,18 +4378,18 @@
         <input type="password" class="form-control" id="editPassword" placeholder="Leave blank to keep unchanged">
       </div>
     </div>
-    <div class="offcanvas-footer-sheet">
-      <button type="button" class="btn btn-secondary" onclick="closeOffcanvas('editUserModal')" data-i18n="close">Close</button>
-      <button type="submit" class="btn btn-info" data-i18n="saveChanges">Save Changes</button>
+    <div class="offcanvas-footer-sheet" style="background-color: #ffffff; border-top: 1px solid #e4e4e7;">
+      <button type="button" class="btn btn-outline-secondary" onclick="closeOffcanvas('editUserModal')" data-i18n="close">Close</button>
+      <button type="submit" class="btn btn-dark" data-i18n="saveChanges">Save Changes</button>
     </div>
   </form>
 </div>
 
 <!-- Category Modal -->
 <div class="offcanvas-sheet" id="categoryModal">
-  <div class="offcanvas-header-sheet bg-warning">
-    <h5 class="offcanvas-title font-weight-bold text-dark" id="categoryModalLabel">Category Info</h5>
-    <button type="button" class="close-btn text-dark" onclick="closeOffcanvas('categoryModal')">&times;</button>
+  <div class="offcanvas-header-sheet" style="background-color: #ffffff; color: #09090b; border-bottom: 1px solid #e4e4e7;">
+    <h5 class="offcanvas-title font-weight-bold" id="categoryModalLabel" style="color: #09090b !important;">Category Info</h5>
+    <button type="button" class="close-btn" style="color: #71717a; font-size: 20px;" onclick="closeOffcanvas('categoryModal')">&times;</button>
   </div>
   <form id="categoryForm" class="h-100 d-flex flex-column m-0">
     <input type="hidden" id="categoryId">
@@ -4367,20 +4431,20 @@
         </select>
       </div>
     </div>
-    <div class="offcanvas-footer-sheet">
-      <button type="button" class="btn btn-secondary" onclick="closeOffcanvas('categoryModal')">Close</button>
-      <button type="submit" class="btn btn-warning">Save Category</button>
+    <div class="offcanvas-footer-sheet" style="background-color: #ffffff; border-top: 1px solid #e4e4e7;">
+      <button type="button" class="btn btn-outline-secondary" onclick="closeOffcanvas('categoryModal')">Close</button>
+      <button type="submit" class="btn btn-dark">Save Category</button>
     </div>
   </form>
 </div>
 
 <!-- Story Modal -->
 <div class="offcanvas-sheet" id="storyModal">
-  <div class="offcanvas-header-sheet bg-success text-white shadow-sm">
-    <h5 class="offcanvas-title font-weight-bold" id="storyModalLabel">
-      <i class="fas fa-book mr-2"></i>Story Info
+  <div class="offcanvas-header-sheet" style="background-color: #ffffff; color: #09090b; border-bottom: 1px solid #e4e4e7;">
+    <h5 class="offcanvas-title font-weight-bold" id="storyModalLabel" style="color: #09090b !important;">
+      <i class="fas fa-book text-dark mr-2"></i>Story Info
     </h5>
-    <button type="button" class="close-btn text-white" onclick="closeOffcanvas('storyModal')">&times;</button>
+    <button type="button" class="close-btn" style="color: #71717a; font-size: 20px;" onclick="closeOffcanvas('storyModal')">&times;</button>
   </div>
   <form id="storyForm" class="h-100 d-flex flex-column m-0">
     <input type="hidden" id="storyId">
@@ -4389,8 +4453,8 @@
       <!-- General Section Card -->
       <div class="card mb-3 border-0 shadow-sm" style="border-radius: 8px;">
         <div class="card-body p-3">
-          <h6 class="text-success font-weight-bold mb-3 border-bottom pb-2" style="font-size: 14px;">
-            <i class="fas fa-info-circle mr-1"></i> General Details
+          <h6 class="text-dark font-weight-bold mb-3 border-bottom pb-2" style="font-size: 14px;">
+            <i class="fas fa-info-circle text-muted mr-1"></i> General Details
           </h6>
           <div class="form-group">
             <label for="storyTitle" class="font-weight-bold text-secondary" style="font-size: 13px;">Title *</label>
@@ -4432,8 +4496,8 @@
       <!-- Media Files Section Card -->
       <div class="card mb-3 border-0 shadow-sm" style="border-radius: 8px;">
         <div class="card-body p-3">
-          <h6 class="text-success font-weight-bold mb-3 border-bottom pb-2" style="font-size: 14px;">
-            <i class="fas fa-photo-video mr-1"></i> Media Assets
+          <h6 class="text-dark font-weight-bold mb-3 border-bottom pb-2" style="font-size: 14px;">
+            <i class="fas fa-photo-video text-muted mr-1"></i> Media Assets
           </h6>
           
           <!-- Image Input & Preview -->
@@ -4469,8 +4533,8 @@
       <!-- Playback & Visibility Settings Card -->
       <div class="card mb-3 border-0 shadow-sm" style="border-radius: 8px;">
         <div class="card-body p-3">
-          <h6 class="text-success font-weight-bold mb-3 border-bottom pb-2" style="font-size: 14px;">
-            <i class="fas fa-sliders-h mr-1"></i> Playback & Visibility
+          <h6 class="text-dark font-weight-bold mb-3 border-bottom pb-2" style="font-size: 14px;">
+            <i class="fas fa-sliders-h text-muted mr-1"></i> Playback & Visibility
           </h6>
           <div class="row">
             <div class="col-md-6">
@@ -4512,8 +4576,8 @@
       <!-- Content Text Card -->
       <div class="card mb-2 border-0 shadow-sm" style="border-radius: 8px;">
         <div class="card-body p-3">
-          <h6 class="text-success font-weight-bold mb-3 border-bottom pb-2" style="font-size: 14px;">
-            <i class="fas fa-file-alt mr-1"></i> Story Text / Transcript
+          <h6 class="text-dark font-weight-bold mb-3 border-bottom pb-2" style="font-size: 14px;">
+            <i class="fas fa-file-alt text-muted mr-1"></i> Story Text / Transcript
           </h6>
           <div class="form-group mb-0">
             <textarea class="form-control" id="storyContentText" rows="5" placeholder="Type or paste the story transcript text here..." style="font-size: 13px; line-height: 1.5;"></textarea>
@@ -4522,11 +4586,11 @@
       </div>
 
     </div>
-    <div class="offcanvas-footer-sheet bg-white border-top shadow-sm p-3 d-flex justify-content-end" style="gap: 8px;">
-      <button type="button" class="btn btn-secondary" onclick="closeOffcanvas('storyModal')">
+    <div class="offcanvas-footer-sheet bg-white border-top p-3 d-flex justify-content-end" style="gap: 8px;">
+      <button type="button" class="btn btn-outline-secondary" onclick="closeOffcanvas('storyModal')">
         <i class="fas fa-times mr-1"></i> Cancel
       </button>
-      <button type="submit" class="btn btn-success">
+      <button type="submit" class="btn btn-dark">
         <i class="fas fa-save mr-1"></i> Save & Publish
       </button>
     </div>
@@ -4535,9 +4599,9 @@
 
 <!-- Audio Item Modal -->
 <div class="offcanvas-sheet" id="audioItemModal">
-  <div class="offcanvas-header-sheet bg-primary text-white">
-    <h5 class="offcanvas-title font-weight-bold" id="audioItemModalLabel">Audio Item Info</h5>
-    <button type="button" class="close-btn text-white" onclick="closeOffcanvas('audioItemModal')">&times;</button>
+  <div class="offcanvas-header-sheet" style="background-color: #ffffff; color: #09090b; border-bottom: 1px solid #e4e4e7;">
+    <h5 class="offcanvas-title font-weight-bold" id="audioItemModalLabel" style="color: #09090b !important;">Audio Item Info</h5>
+    <button type="button" class="close-btn" style="color: #71717a; font-size: 20px;" onclick="closeOffcanvas('audioItemModal')">&times;</button>
   </div>
   <form id="audioItemForm" class="h-100 d-flex flex-column m-0">
     <input type="hidden" id="audioItemId">
@@ -4607,18 +4671,18 @@
         </div>
       </div>
     </div>
-    <div class="offcanvas-footer-sheet">
-      <button type="button" class="btn btn-secondary" onclick="closeOffcanvas('audioItemModal')">Close</button>
-      <button type="submit" class="btn btn-primary">Save & Publish</button>
+    <div class="offcanvas-footer-sheet" style="background-color: #ffffff; border-top: 1px solid #e4e4e7;">
+      <button type="button" class="btn btn-outline-secondary" onclick="closeOffcanvas('audioItemModal')">Close</button>
+      <button type="submit" class="btn btn-dark">Save & Publish</button>
     </div>
   </form>
 </div>
 
 <!-- Product Modal -->
 <div class="offcanvas-sheet" id="productModal">
-  <div class="offcanvas-header-sheet bg-info text-white">
-    <h5 class="offcanvas-title font-weight-bold" id="productModalLabel">Product Info</h5>
-    <button type="button" class="close-btn text-white" onclick="closeOffcanvas('productModal')">&times;</button>
+  <div class="offcanvas-header-sheet" style="background-color: #ffffff; color: #09090b; border-bottom: 1px solid #e4e4e7;">
+    <h5 class="offcanvas-title font-weight-bold" id="productModalLabel" style="color: #09090b !important;">Product Info</h5>
+    <button type="button" class="close-btn" style="color: #71717a; font-size: 20px;" onclick="closeOffcanvas('productModal')">&times;</button>
   </div>
   <form id="productForm" class="h-100 d-flex flex-column m-0">
     <input type="hidden" id="productId">
@@ -4672,18 +4736,18 @@
         </div>
       </div>
     </div>
-    <div class="offcanvas-footer-sheet">
-      <button type="button" class="btn btn-secondary" onclick="closeOffcanvas('productModal')">Close</button>
-      <button type="submit" class="btn btn-info">Save Product</button>
+    <div class="offcanvas-footer-sheet" style="background-color: #ffffff; border-top: 1px solid #e4e4e7;">
+      <button type="button" class="btn btn-outline-secondary" onclick="closeOffcanvas('productModal')">Close</button>
+      <button type="submit" class="btn btn-dark">Save Product</button>
     </div>
   </form>
 </div>
 
 <!-- Music Item Modal -->
 <div class="offcanvas-sheet" id="musicItemModal">
-  <div class="offcanvas-header-sheet text-white" style="background-color: #6f42c1 !important;">
-    <h5 class="offcanvas-title font-weight-bold" id="musicItemModalLabel">Music Item Info</h5>
-    <button type="button" class="close-btn text-white" onclick="closeOffcanvas('musicItemModal')">&times;</button>
+  <div class="offcanvas-header-sheet" style="background-color: #ffffff; color: #09090b; border-bottom: 1px solid #e4e4e7;">
+    <h5 class="offcanvas-title font-weight-bold" id="musicItemModalLabel" style="color: #09090b !important;">Music Item Info</h5>
+    <button type="button" class="close-btn" style="color: #71717a; font-size: 20px;" onclick="closeOffcanvas('musicItemModal')">&times;</button>
   </div>
   <form id="musicItemForm" class="h-100 d-flex flex-column m-0">
     <input type="hidden" id="musicItemId">
@@ -4732,27 +4796,27 @@
         </div>
       </div>
     </div>
-    <div class="offcanvas-footer-sheet">
-      <button type="button" class="btn btn-secondary" onclick="closeOffcanvas('musicItemModal')">Close</button>
-      <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane mr-1"></i> Add & Publish</button>
+    <div class="offcanvas-footer-sheet" style="background-color: #ffffff; border-top: 1px solid #e4e4e7;">
+      <button type="button" class="btn btn-outline-secondary" onclick="closeOffcanvas('musicItemModal')">Close</button>
+      <button type="submit" class="btn btn-dark"><i class="fas fa-paper-plane mr-1"></i> Add & Publish</button>
     </div>
   </form>
 </div>
 
 <!-- Video Modal -->
 <div class="offcanvas-sheet" id="videoModal">
-  <div class="offcanvas-header-sheet bg-danger text-white">
-    <h5 class="offcanvas-title font-weight-bold" id="videoModalLabel">Video Info</h5>
+  <div class="offcanvas-header-sheet" style="background-color: #ffffff; color: #09090b; border-bottom: 1px solid #e4e4e7;">
+    <h5 class="offcanvas-title font-weight-bold" id="videoModalLabel" style="color: #09090b !important;">Video Info</h5>
     <div class="offcanvas-header-actions">
-      <button type="submit" form="videoForm" class="btn btn-light text-danger header-save-btn">
-        <i class="fas fa-save mr-1"></i> Save &amp; Publish
+      <button type="submit" form="videoForm" class="btn btn-dark header-save-btn" style="color: #ffffff;">
+        <i class="fas fa-save mr-1"></i> Save & Publish
       </button>
-      <button type="button" class="close-btn text-white" onclick="closeVideoEditorView()">&times;</button>
+      <button type="button" class="close-btn" style="color: #71717a; font-size: 20px;" onclick="closeVideoEditorView()">&times;</button>
     </div>
   </div>
   <form id="videoForm" class="h-100 d-flex flex-column m-0">
     <input type="hidden" id="videoId">
-    <div class="offcanvas-body-sheet">
+    <div class="offcanvas-body-sheet" style="background-color: #ffffff;">
       <div class="upload-progress-wrap" id="videoUploadProgressWrap">
         <div class="upload-progress-label">
           <span>Uploading video</span>
@@ -4760,65 +4824,96 @@
         </div>
         <div class="upload-progress-bar"><span id="videoUploadProgressBar"></span></div>
       </div>
+      
+      <div class="alert" style="background-color: #f4f4f5; border: 1px solid #e4e4e7; border-radius: 6px; font-size: 13px; color: #3f3f46; padding: 12px 16px;">
+        <strong>Quick use:</strong> Select the banner and video files, then save.
+      </div>
+
       <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-light border mb-3" style="font-size: 13px; line-height: 1.45;">
-            <strong>Quick use:</strong> Select the banner and video files, then save.
-          </div>
+        <div class="col-md-6">
           <div class="form-group">
-            <label for="videoTitle" class="font-weight-bold">Title *</label>
+            <label for="videoTitle">Title *</label>
             <input type="text" class="form-control" id="videoTitle" required placeholder="e.g. Bible Stories for Kids">
           </div>
-          <input type="hidden" id="videoSlug">
+        </div>
+        <div class="col-md-6">
           <div class="form-group">
-            <label for="videoCategory" class="font-weight-bold">Category Name *</label>
+            <label for="videoCategory">Category Name *</label>
             <input type="text" class="form-control" id="videoCategory" required placeholder="e.g. Kids Videos">
           </div>
-          <input type="hidden" id="videoCategoryId">
-          <div class="form-group">
-            <label for="videoVerticalBannerFile" class="font-weight-bold">Vertical Banner <span class="text-muted">(preferred)</span></label>
-            <input type="file" class="form-control-file" id="videoVerticalBannerFile" accept="image/*">
+        </div>
+      </div>
+      
+      <input type="hidden" id="videoSlug">
+      <input type="hidden" id="videoCategoryId">
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group" id="videoVerticalBannerContainer">
+            <label for="videoVerticalBannerFile">Vertical Banner <span class="text-muted font-weight-normal">(preferred)</span></label>
+            <div id="videoVerticalBannerPreview" class="mb-2 d-none">
+              <img src="" alt="Vertical Banner" style="max-width: 150px; border-radius: 6px; border: 1px solid #e4e4e7; display: block; margin-bottom: 8px;">
+              <button type="button" class="btn btn-sm btn-outline-danger" id="btnDeleteVideoVerticalBanner">
+                <i class="fas fa-trash"></i> Delete Picture
+              </button>
+            </div>
+            <div id="videoVerticalBannerInputWrapper">
+              <input type="file" class="form-control-file" id="videoVerticalBannerFile" accept="image/*">
+              <small class="text-muted d-block mt-1" style="font-size: 12px;">Selecting a file is the fastest option for the cover image.</small>
+            </div>
             <input type="hidden" id="videoVerticalBannerUrl">
-            <small class="text-muted d-block mt-1">Selecting a file is the fastest option for the cover image.</small>
           </div>
+        </div>
+        <div class="col-md-6">
           <div class="form-group">
-            <label for="videoFile" class="font-weight-bold">Video File <span class="text-muted">(preferred)</span></label>
+            <label for="videoFile">Video File <span class="text-muted font-weight-normal">(preferred)</span></label>
             <input type="file" class="form-control-file" id="videoFile" accept="video/*">
             <input type="hidden" id="videoUrl">
-            <small class="text-muted d-block mt-1">Direct file upload is recommended for large files.</small>
+            <small class="text-muted d-block mt-1" style="font-size: 12px;">Direct file upload is recommended for large files.</small>
           </div>
-          <div class="form-group">
-            <label for="videoSrtFile" class="font-weight-bold">Subtitle File <span class="text-muted">(optional)</span></label>
-            <input type="file" class="form-control-file" id="videoSrtFile" accept=".srt,.vtt,text/plain,text/vtt">
-            <input type="hidden" id="videoSrtUrl">
-          </div>
-          <div class="video-form-card">
-            <div class="form-group">
-              <label for="videoIsPublished" class="font-weight-bold">Status</label>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="videoSrtFile">Subtitle File <span class="text-muted font-weight-normal">(optional)</span></label>
+        <input type="file" class="form-control-file" id="videoSrtFile" accept=".srt,.vtt,text/plain,text/vtt">
+        <input type="hidden" id="videoSrtUrl">
+      </div>
+
+      <div class="video-form-card">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group mb-md-0">
+              <label for="videoIsPublished">Status</label>
               <select class="form-control" id="videoIsPublished">
                 <option value="true" selected>Published</option>
                 <option value="false">Draft</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="videoIsLocked" class="font-weight-bold">Access</label>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group mb-md-0">
+              <label for="videoIsLocked">Access</label>
               <select class="form-control" id="videoIsLocked">
                 <option value="false" selected>Free</option>
                 <option value="true">Locked</option>
               </select>
             </div>
+          </div>
+          <div class="col-md-4">
             <div class="form-group mb-0">
-              <label for="videoOrderIndex" class="font-weight-bold">Order Index</label>
+              <label for="videoOrderIndex">Order Index</label>
               <input type="number" class="form-control" id="videoOrderIndex" placeholder="Auto">
-              <small class="text-muted">Auto-filled from the current list. Change only if you need a custom order.</small>
+              <small class="text-muted" style="font-size: 11px;">Auto-filled from list.</small>
             </div>
           </div>
         </div>
       </div>
+      
     </div>
-    <div class="offcanvas-footer-sheet">
-      <button type="button" class="btn btn-secondary" onclick="closeVideoEditorView()"><i class="fas fa-times mr-1"></i> Back to Videos</button>
-      <button type="submit" class="btn btn-danger"><i class="fas fa-save mr-1"></i> Save & Publish</button>
+    <div class="offcanvas-footer-sheet" style="background-color: #ffffff; border-top: 1px solid #e4e4e7;">
+      <button type="button" class="btn btn-outline-secondary" onclick="closeVideoEditorView()"><i class="fas fa-times mr-1"></i> Cancel</button>
+      <button type="submit" class="btn btn-dark"><i class="fas fa-save mr-1"></i> Save & Publish</button>
     </div>
   </form>
 </div>
