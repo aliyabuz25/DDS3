@@ -42,7 +42,7 @@ http {
         server_name  app.thekidsbiblestories.com 16-171-22-191.sslip.io ec2-16-171-22-191.eu-north-1.compute.amazonaws.com 16.171.22.191;
 
         location /api/ {
-            proxy_pass http://127.0.0.1:3000;
+            proxy_pass http://127.0.0.1:7766;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection 'upgrade';
@@ -59,7 +59,7 @@ http {
         }
 
         location /uploads/ {
-            proxy_pass http://127.0.0.1:3000;
+            proxy_pass http://127.0.0.1:7766;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection 'upgrade';
@@ -123,7 +123,7 @@ http {
         include /etc/nginx/default.d/*.conf;
 
         location /api/ {
-            proxy_pass http://127.0.0.1:3000;
+            proxy_pass http://127.0.0.1:7766;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection 'upgrade';
@@ -140,7 +140,7 @@ http {
         }
 
         location /uploads/ {
-            proxy_pass http://127.0.0.1:3000;
+            proxy_pass http://127.0.0.1:7766;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection 'upgrade';
@@ -157,7 +157,7 @@ http {
         }
 
         location / {
-            proxy_pass http://127.0.0.1:3000;
+            proxy_pass http://127.0.0.1:7766;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection 'upgrade';

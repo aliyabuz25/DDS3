@@ -94,7 +94,7 @@ nano .env
 ```
 İçeriği aşağıdaki gibi doldurun (`Ctrl+O` -> `Enter` kaydedip, `Ctrl+X` çıkın):
 ```env
-PORT=3000
+PORT=7766
 NODE_ENV=production
 JWT_SECRET=production_jwt_gizli_anahtari_buraya_yazilacak
 
@@ -125,14 +125,14 @@ pm2 startup
 pm2 save
 ```
 
-### Adım 6: Nginx Reverse Proxy (3000 Port Yönlendirmesi)
+### Adım 6: Nginx Reverse Proxy (7766 Port Yönlendirmesi)
 ```bash
 sudo nano /etc/nginx/nginx.conf
 ```
 `server { listen 80 ... }` bloğunun altındaki `location /` kısmını şu şekilde değiştirin:
 ```nginx
 location / {
-    proxy_pass http://127.0.0.1:3000;
+    proxy_pass http://127.0.0.1:7766;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';

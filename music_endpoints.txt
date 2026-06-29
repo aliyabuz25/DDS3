@@ -5,7 +5,7 @@ KID BIBLE SERVICE - MÜZİK APİ ENDPOİNT KULLANIM REHBERİ (MUSIC ENDPOINTS GU
 Tüm API isteklerinin başarılı olabilmesi için aşağıdaki HTTP Header'ının gönderilmesi ZORUNLUDUR:
 User-Agent: bible-appclient
 
-Base URL (Yerel Geliştirme): http://localhost:3000
+Base URL (Yerel Geliştirme): http://localhost:7766
 Base URL (Canlı Sunucu): https://app.thekidsbiblestories.com
 
 --------------------------------------------------------------------------------

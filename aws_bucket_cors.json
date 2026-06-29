@@ -2,9 +2,9 @@
   "CORSRules": [
     {
       "AllowedOrigins": [
-        "http://54.196.133.35:3000",
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
+        "http://54.196.133.35:7766",
+        "http://localhost:7766",
+        "http://127.0.0.1:7766",
         "https://16-171-22-191.sslip.io"
       ],
       "AllowedMethods": [
@@ -23,7 +23,7 @@
         "x-amz-id-2",
         "x-amz-server-side-encryption"
       ],
-      "MaxAgeSeconds": 3000
+      "MaxAgeSeconds": 7766
     }
   ]
 }

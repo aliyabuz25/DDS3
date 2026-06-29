@@ -4,10 +4,10 @@ BibleDashboard Mobile App API Documentation
 Base URL
 --------
 Production:
-http://54.196.133.35:3000
+http://54.196.133.35:7766
 
 Local server test:
-http://127.0.0.1:3000
+http://127.0.0.1:7766
 
 Default headers
 ---------------
@@ -37,7 +37,7 @@ POST /api/register
 Creates a new user.
 
 URL:
-http://54.196.133.35:3000/api/register
+http://54.196.133.35:7766/api/register
 
 Body:
 {
@@ -67,7 +67,7 @@ POST /api/login
 Logs in a user and returns a JWT token.
 
 URL:
-http://54.196.133.35:3000/api/login
+http://54.196.133.35:7766/api/login
 
 Body:
 {
@@ -94,7 +94,7 @@ GET /api/auth/verify
 Email verification endpoint. This is usually opened from an email verification link.
 
 URL:
-http://54.196.133.35:3000/api/auth/verify?token=<VERIFY_TOKEN>
+http://54.196.133.35:7766/api/auth/verify?token=<VERIFY_TOKEN>
 
 
 Content Endpoints
@@ -105,7 +105,7 @@ GET /api/catalogs
 Returns visual catalog/publication list.
 
 URL:
-http://54.196.133.35:3000/api/catalogs
+http://54.196.133.35:7766/api/catalogs
 
 Response item fields:
 - id
@@ -121,7 +121,7 @@ GET /api/categories
 Returns content categories.
 
 URL:
-http://54.196.133.35:3000/api/categories
+http://54.196.133.35:7766/api/categories
 
 Response item fields:
 - id
@@ -145,7 +145,7 @@ GET /api/stories
 Returns story content.
 
 URL:
-http://54.196.133.35:3000/api/stories
+http://54.196.133.35:7766/api/stories
 
 Optional query filters:
 ?categoryId=1
@@ -174,7 +174,7 @@ GET /api/audio-items
 Returns audio story/content list.
 
 URL:
-http://54.196.133.35:3000/api/audio-items
+http://54.196.133.35:7766/api/audio-items
 
 Optional query filters:
 ?categoryId=1
@@ -203,7 +203,7 @@ GET /api/music-items
 Returns music/audio item list.
 
 URL:
-http://54.196.133.35:3000/api/music-items
+http://54.196.133.35:7766/api/music-items
 
 Response item fields:
 - id
@@ -221,7 +221,7 @@ GET /api/music-items/:id
 Returns one music item by ID.
 
 Example:
-http://54.196.133.35:3000/api/music-items/1
+http://54.196.133.35:7766/api/music-items/1
 
 
 GET /api/products
@@ -229,7 +229,7 @@ GET /api/products
 Returns store/product items.
 
 URL:
-http://54.196.133.35:3000/api/products
+http://54.196.133.35:7766/api/products
 
 Response item fields:
 - id
@@ -260,7 +260,7 @@ GET /api/videos
 Returns video list for the mobile app.
 
 URL:
-http://54.196.133.35:3000/api/videos
+http://54.196.133.35:7766/api/videos
 
 Optional query filters:
 ?categoryId=1
@@ -312,7 +312,7 @@ GET /api/videos/:id
 Returns one video by ID.
 
 Example:
-http://54.196.133.35:3000/api/videos/1
+http://54.196.133.35:7766/api/videos/1
 
 
 Subscription Endpoints
@@ -323,8 +323,8 @@ GET /api/subscription/check
 Checks subscription status by uid/userId/uuid query parameter.
 
 URL examples:
-http://54.196.133.35:3000/api/subscription/check?uid=123
-http://54.196.133.35:3000/api/subscription/check?userId=123
+http://54.196.133.35:7766/api/subscription/check?uid=123
+http://54.196.133.35:7766/api/subscription/check?userId=123
 
 Active response:
 {
@@ -349,7 +349,7 @@ POST /api/subscription/check
 Same subscription check using JSON body.
 
 URL:
-http://54.196.133.35:3000/api/subscription/check
+http://54.196.133.35:7766/api/subscription/check
 
 Body:
 {
@@ -365,7 +365,7 @@ POST /api/payments
 Creates a payment/subscription record.
 
 URL:
-http://54.196.133.35:3000/api/payments
+http://54.196.133.35:7766/api/payments
 
 Typical body:
 {
@@ -384,7 +384,7 @@ POST /api/payments/stripe-checkout
 Creates a Stripe checkout link.
 
 URL:
-http://54.196.133.35:3000/api/payments/stripe-checkout
+http://54.196.133.35:7766/api/payments/stripe-checkout
 
 Body:
 {
@@ -414,7 +414,7 @@ GET /api/notifications
 Returns notification list.
 
 URL:
-http://54.196.133.35:3000/api/notifications
+http://54.196.133.35:7766/api/notifications
 
 Response item fields:
 - id
@@ -435,7 +435,7 @@ GET /api/locales
 Returns localization dictionary.
 
 URL:
-http://54.196.133.35:3000/api/locales
+http://54.196.133.35:7766/api/locales
 
 
 Admin-only Endpoints
