@@ -1215,8 +1215,8 @@
           <li class="nav-header text-uppercase text-muted" data-i18n="system">Sistem</li>
           <li class="nav-item">
             <a href="#" class="nav-link" id="nav-users">
-              <i class="nav-icon fas fa-users-cog"></i>
-              <p data-i18n="users">Kullanıcılar</p>
+              <i class="nav-icon fas fa-mobile-alt"></i>
+              <p data-i18n="mobileAppUsers">Mobil Uygulama Kullanıcıları</p>
             </a>
           </li>
           <li class="nav-item">
@@ -1297,11 +1297,11 @@
                 <div class="card-body p-4 d-flex flex-column justify-content-between">
                   <div class="d-flex justify-content-between align-items-start mb-3">
                     <div>
-                      <span class="text-xs font-weight-bold text-uppercase tracking-wider text-muted d-block mb-1" data-i18n="users">Users</span>
+                      <span class="text-xs font-weight-bold text-uppercase tracking-wider text-muted d-block mb-1" data-i18n="mobileAppUsers">Mobile App Users</span>
                       <h3 class="font-weight-bold m-0" id="usersCount" style="font-size: 26px; color: #09090b; letter-spacing: -0.02em;">0</h3>
                     </div>
                     <div class="d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: #f4f4f5; border-radius: 8px; color: #18181b;">
-                      <i class="fas fa-users" style="font-size: 18px;"></i>
+                      <i class="fas fa-mobile-alt" style="font-size: 18px;"></i>
                     </div>
                   </div>
                   <a href="#" class="d-flex align-items-center text-xs font-weight-semibold text-dark" onclick="$('#nav-users').trigger('click'); return false;" style="gap: 4px; text-decoration: none;">
@@ -1824,22 +1824,23 @@
 
         <!-- Section 5: Users List -->
         <div class="content-section d-none" id="users-section">
-          <div class="card card-dark card-outline">
-            <div class="card-header">
-              <h3 class="card-title font-weight-bold text-dark m-0">
-                <i class="fas fa-users text-dark mr-1"></i> <span data-i18n="users">Users</span>
+          <div class="card card-dark card-outline shadow-sm border-0">
+            <div class="card-header bg-white border-bottom py-3">
+              <h3 class="card-title font-weight-bold text-dark m-0" style="font-size: 1.1rem; letter-spacing: -0.02em;">
+                <i class="fas fa-mobile-alt text-muted mr-2"></i> <span data-i18n="mobileAppUsers">Mobile App Users</span>
               </h3>
             </div>
-            <div class="card-body">
-              <table id="usersTable" class="table table-bordered table-striped table-hover w-100">
-                <thead>
+            <div class="card-body p-0">
+              <table id="usersTable" class="table table-hover w-100 m-0 border-0">
+                <thead class="bg-light">
                   <tr>
-                    <th style="width: 50px;">ID</th>
-                    <th><span data-i18n="firstName">First Name</span> & <span data-i18n="lastName">Last Name</span></th>
-                    <th data-i18n="email">Email</th>
-                    <th data-i18n="phoneNumber">Phone Number</th>
-                    <th style="width: 130px;" data-i18n="createdAt">Created At</th>
-                    <th style="width: 150px; text-align: center;" data-i18n="action">Action</th>
+                    <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3 pl-4" style="width: 50px;">ID</th>
+                    <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3"><span data-i18n="firstName">First Name</span> & <span data-i18n="lastName">Last Name</span></th>
+                    <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3" data-i18n="email">Email</th>
+                    <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3" data-i18n="phoneNumber">Phone Number</th>
+                    <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3">Subscription</th>
+                    <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3" style="width: 130px;" data-i18n="createdAt">Created At</th>
+                    <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3 pr-4" style="width: 100px; text-align: center;" data-i18n="action">Action</th>
                   </tr>
                 </thead>
                 <tbody id="usersTableBody">
@@ -1854,59 +1855,61 @@
         <div class="content-section d-none" id="admins-section">
           <div class="row">
             <div class="col-md-4">
-              <div class="card card-dark card-outline">
-                <div class="card-header">
-                  <h3 class="card-title font-weight-bold text-dark m-0">
-                    <i class="fas fa-user-plus mr-1"></i> <span data-i18n="addAdmin">Admin Ekle</span>
+              <div class="card card-dark card-outline shadow-sm border-0">
+                <div class="card-header bg-white border-bottom-0 pb-0">
+                  <h3 class="card-title font-weight-bold text-dark m-0 mt-2" style="font-size: 1.1rem; letter-spacing: -0.02em;">
+                    <i class="fas fa-user-plus mr-2 text-muted"></i> <span data-i18n="addAdmin">Add Admin</span>
                   </h3>
                 </div>
                 <form id="addAdminForm">
-                  <div class="card-body">
+                  <div class="card-body pt-3">
                     <div id="admin-alert"></div>
-                    <div class="form-group">
-                      <label class="font-weight-bold" for="adminFirstName" data-i18n="firstName">Ad</label>
-                      <input type="text" class="form-control" id="adminFirstName" required>
+                    <div class="form-group mb-3">
+                      <label class="font-weight-600 text-secondary small text-uppercase mb-1" for="adminFirstName" data-i18n="firstName">First Name</label>
+                      <input type="text" class="form-control" id="adminFirstName" required placeholder="John">
                     </div>
-                    <div class="form-group">
-                      <label class="font-weight-bold" for="adminLastName" data-i18n="lastName">Soyad</label>
-                      <input type="text" class="form-control" id="adminLastName" required>
+                    <div class="form-group mb-3">
+                      <label class="font-weight-600 text-secondary small text-uppercase mb-1" for="adminLastName" data-i18n="lastName">Last Name</label>
+                      <input type="text" class="form-control" id="adminLastName" required placeholder="Doe">
                     </div>
-                    <div class="form-group">
-                      <label class="font-weight-bold" for="adminEmail" data-i18n="email">E-posta</label>
-                      <input type="email" class="form-control" id="adminEmail" required>
+                    <div class="form-group mb-3">
+                      <label class="font-weight-600 text-secondary small text-uppercase mb-1" for="adminEmail" data-i18n="email">Email</label>
+                      <input type="email" class="form-control" id="adminEmail" required placeholder="john@example.com">
                     </div>
-                    <div class="form-group">
-                      <label class="font-weight-bold" for="adminPhoneNumber" data-i18n="phoneNumber">Telefon</label>
-                      <input type="text" class="form-control" id="adminPhoneNumber" required>
+                    <div class="form-group mb-3">
+                      <label class="font-weight-600 text-secondary small text-uppercase mb-1" for="adminPhoneNumber" data-i18n="phoneNumber">Phone Number</label>
+                      <input type="text" class="form-control" id="adminPhoneNumber" required placeholder="+1 555-0123">
                     </div>
-                    <div class="form-group">
-                      <label class="font-weight-bold" for="adminPassword" data-i18n="password">Şifre</label>
-                      <input type="password" class="form-control" id="adminPassword" required>
+                    <div class="form-group mb-3">
+                      <label class="font-weight-600 text-secondary small text-uppercase mb-1" for="adminPassword" data-i18n="password">Password</label>
+                      <input type="password" class="form-control" id="adminPassword" required placeholder="••••••••">
                     </div>
                   </div>
-                  <div class="card-footer bg-light">
-                    <button type="submit" class="btn btn-dark btn-block"><i class="fas fa-user-plus mr-1"></i> <span data-i18n="addAdminSubmit">Admin Kaydet</span></button>
+                  <div class="card-footer bg-white border-top-0 pt-0 pb-3">
+                    <button type="submit" class="btn btn-dark w-100 font-weight-bold py-2 shadow-sm" style="background-color: #09090b; border-color: #09090b; border-radius: 6px;">
+                      <i class="fas fa-user-plus mr-1"></i> <span data-i18n="addAdminSubmit">Create Admin</span>
+                    </button>
                   </div>
                 </form>
               </div>
             </div>
             <div class="col-md-8">
-              <div class="card card-dark card-outline">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                  <h3 class="card-title font-weight-bold text-dark m-0">
-                    <i class="fas fa-user-shield mr-1"></i> <span data-i18n="admins">Adminler</span>
+              <div class="card card-dark card-outline shadow-sm border-0">
+                <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                  <h3 class="card-title font-weight-bold text-dark m-0" style="font-size: 1.1rem; letter-spacing: -0.02em;">
+                    <i class="fas fa-user-shield mr-2 text-muted"></i> <span data-i18n="admins">Admins</span>
                   </h3>
                 </div>
-                <div class="card-body">
-                  <table id="adminsTable" class="table table-bordered table-striped table-hover w-100">
-                    <thead>
+                <div class="card-body p-0">
+                  <table id="adminsTable" class="table table-hover w-100 m-0 border-0">
+                    <thead class="bg-light">
                       <tr>
-                        <th style="width: 50px;">ID</th>
-                        <th data-i18n="fullName">Ad Soyad</th>
-                        <th data-i18n="email">Email</th>
-                        <th data-i18n="phoneNumber">Telefon</th>
-                        <th style="width: 130px;" data-i18n="createdAt">Created At</th>
-                        <th style="width: 180px; text-align: center;" data-i18n="action">Action</th>
+                        <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3 pl-4" style="width: 50px;">ID</th>
+                        <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3" data-i18n="fullName">Full Name</th>
+                        <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3" data-i18n="email">Email</th>
+                        <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3" data-i18n="phoneNumber">Phone Number</th>
+                        <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3" style="width: 130px;" data-i18n="createdAt">Created At</th>
+                        <th class="border-top-0 border-bottom-0 text-uppercase text-secondary font-weight-600 small py-3 pr-4" style="width: 100px; text-align: center;" data-i18n="action">Action</th>
                       </tr>
                     </thead>
                     <tbody id="adminsTableBody"></tbody>
@@ -1928,19 +1931,31 @@
             <div class="card-body">
               <table id="paymentsTable" class="table table-bordered table-striped table-hover w-100">
                 <thead>
-                      <tr>
-                        <th style="width: 50px;">ID</th>
-                        <th>User ID</th>
-                        <th data-i18n="email">Email</th>
-                        <th data-i18n="productId">Product ID</th>
-                    <th data-i18n="amount">Amount</th>
-                    <th data-i18n="currency">Currency</th>
-                        <th>Gateway</th>
-                        <th data-i18n="status">Status</th>
-                        <th data-i18n="transactionId">Transaction ID</th>
-                        <th style="width: 130px;" data-i18n="createdAt">Created At</th>
-                        <th style="width: 220px;" data-i18n="action">Action</th>
-                      </tr>
+              
+              let subBadge = '<span class="badge badge-secondary px-2 py-1">None</span>';
+              if (u.subscriptionStatus === 'active') {
+                subBadge = '<span class="badge badge-success px-2 py-1" style="background-color: #ecfdf5 !important; border: 1px solid #d1fae5 !important; color: #059669 !important;">Active ' + (u.subscriptionPlan ? '(' + u.subscriptionPlan + ')' : '') + '</span>';
+              } else if (u.subscriptionStatus === 'expired') {
+                subBadge = '<span class="badge badge-danger px-2 py-1">Expired</span>';
+              } else if (u.subscriptionStatus === 'trial') {
+                subBadge = '<span class="badge badge-info px-2 py-1" style="background-color: #f0f9ff !important; border: 1px solid #bae6fd !important; color: #0284c7 !important;">Trial</span>';
+              }
+              
+              rows += `
+              <tr>
+                <td><span class="badge badge-secondary">${u.id}</span></td>
+                <td><strong>${u.firstName} ${u.lastName}</strong></td>
+                <td><code>${u.email}</code></td>
+                <td>${u.phoneNumber}</td>
+                <td>${subBadge}</td>
+                <td><small class="text-muted"><i class="far fa-calendar-alt mr-1"></i> ${date}</small></td>
+                <td class="text-center" style="white-space: nowrap;">
+                  <div class="d-inline-flex" style="gap: 4px;">
+                    <button class="btn btn-sm btn-dark" title="Edit" aria-label="Edit" onclick="openEditUserModal(${u.id}, '${escapeHtml(u.firstName)}', '${escapeHtml(u.lastName)}', '${escapeHtml(u.email)}', '${escapeHtml(u.phoneNumber)}')"><i class="fas fa-pen"></i></button>
+                    <button class="btn btn-sm btn-dark" title="Delete" aria-label="Delete" onclick="deleteUser(${u.id})"><i class="fas fa-trash"></i></button>
+                  </div>
+                </td>
+              </tr>
                     </thead>
                 <tbody id="paymentsTableBody">
                   <!-- Loaded via AJAX -->
